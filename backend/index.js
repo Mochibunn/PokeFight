@@ -1,15 +1,13 @@
 
 import express from 'express';
 import { json } from 'express';
-import {allPokemon,
-    singlePokemon} from './controllers/pokemonCon.mjs';
+import pokemonRoute from './routes/pokemonRoute.js';
 import chalkMsg from './lib/chalk.js';
-
+import errorHandler from './middleware/errorHandler.js'
+import userRoute from './routes/userRoute.js';
 
 const app = express();
-
 app.use(json());
-
 const PORT = process.env.PORT || 3000;
 
 app.get('/', async (req, res) => {
@@ -17,14 +15,10 @@ app.get('/', async (req, res) => {
     return res.json({ "🟢🐰": "Success!" });
 });
 
-app.route('/pokemon')
-.get(allPokemon);
+app.use('/pokemon', pokemonRoute);
 
-app.route('/pokemon/:id')
-.get(singlePokemon);
+app.use('/user', userRoute);
 
-app.route('/pokemon/:id/:info')
-.get();
-
+app.use(errorHandler);
 
 app.listen(PORT, () => chalkMsg(`green`,`\n🟢🐰 Server up on port ${PORT}!`));
