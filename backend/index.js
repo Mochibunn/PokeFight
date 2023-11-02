@@ -2,7 +2,9 @@
 import express from 'express';
 import { json } from 'express';
 import {allPokemon,
-    singlePokemon} from './controllers/pokemonCon.js';
+    singlePokemon} from './controllers/pokemonCon.mjs';
+import chalkMsg from './lib/chalk.js';
+
 
 const app = express();
 
@@ -25,4 +27,4 @@ app.route('/pokemon/:id/:info')
 .get();
 
 
-app.listen(PORT, () => console.log(`Server listening at port ${PORT}`));
+app.listen(PORT, () => chalkMsg(`green`,`\n🟢🐰 Server up on port ${PORT}!`));
