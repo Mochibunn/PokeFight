@@ -2,7 +2,7 @@
 import express from 'express';
 import { json } from 'express';
 import {allPokemon,
-    singlePokemon} from './controllers/pokemonCon.mjs';
+    singlePokemon} from './controllers/pokemonCon.js';
 
 const app = express();
 

@@ -1,5 +1,5 @@
 
-import data from '../data.mjs';
+import data from '../data.js';
 
 const allPokemon = async (req, res) => {
   try {

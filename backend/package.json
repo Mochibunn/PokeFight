@@ -3,9 +3,10 @@
   "version": "1.0.0",
   "description": "Backend for the PokeFight WD43 group 4 project",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "dev": "nodemon -r dotenv/config index.mjs",
-    "start": "node -r dotenv/config index.mjs"
+    "dev": "nodemon -r dotenv/config index.js",
+    "start": "node -r dotenv/config index.js"
   },
   "keywords": [],
   "author": "",
