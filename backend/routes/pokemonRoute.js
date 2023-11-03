@@ -1,6 +1,6 @@
 import express from 'express';
-import {getAllPokemon,
-        getSinglePokemon} from '../controllers/pokemonCon.js';
+import getAllPokemon from '../controllers/pokemonCon.js';
+import getSinglePokemon from '../controllers/getOneCon.js';
 
 const pokemonRoute = express.Router();
 

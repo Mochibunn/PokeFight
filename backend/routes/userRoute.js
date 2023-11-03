@@ -6,4 +6,5 @@ const userRoute = express.Router();
 userRoute.route('/login').post(createUser);
 
 
-export default userRoute;
+
+export default userRoute; 

@@ -2,9 +2,10 @@ import { Schema, model } from 'mongoose';
 
 const playerSchema = new Schema(
   {
-    firstName: {
+    userName: {
       type: String,
       required: true,
+      unique: true,
       maxlength: 20,
       match: [
         /^[a-zA-Z-\s]+$/,
@@ -30,5 +31,6 @@ const playerSchema = new Schema(
 );
 
 const userModel = model('User', playerSchema);
+
 
 export default userModel;

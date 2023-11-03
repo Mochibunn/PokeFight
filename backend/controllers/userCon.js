@@ -3,14 +3,12 @@ import ErrorStatus from '../utils/errorStatus.js';
 
 const createUser = async (req, res, next) => {
   try {
-    const { firstName, lastName, email, password } = req.body;
-    if (!firstName ||  !password)
+    const { userName, password } = req.body;
+    if (!userName ||  !password)
       throw new ErrorStatus('Please provide all required field', 400);
     const newUser = await userModel.create({
       firstName,
-      lastName,
-      email,
-      password,
+      password
     });
 
     return res.json(newUser);
@@ -18,5 +16,6 @@ const createUser = async (req, res, next) => {
     next(error);
   }
 };
+
 
 export default createUser;
