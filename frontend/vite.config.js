@@ -1,15 +1,7 @@
-import { nextui } from "@nextui-org/react";
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
 
-/** @type {import('tailwindcss').Config} */
-export default {
-  content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
-    "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}",
-  ],
-  theme: {
-    extend: {},
-  },
-  darkMode: "class",
-  plugins: [nextui()],
-}
+// https://vitejs.dev/config/
+export default defineConfig({
+  plugins: [react()],
+})
