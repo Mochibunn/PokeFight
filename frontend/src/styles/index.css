@@ -1,3 +1,34 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+  font-family: 'Thirteen Pixel Font'; 
+  src: url(../assets/fonts/ThirteenPixelFontsRegular.ttf);
+}
+
+body,
+html {
+  font-family: 'Thirteen Pixel Font', sans-serif;
+  margin: 0;
+}
+
+
+.glassmorphism-button {
+    background: rgba(255, 255, 255, 0.2); 
+    border: none;
+    padding: 10px 20px;
+    border-radius: 10px; 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px); 
+    color: #fff; 
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.3s;
+  }
+  
+  .glassmorphism-button:hover {
+    background: rgba(255, 255, 255, 0.3); 
+    transform: scale(1.05); 
+  }
+  

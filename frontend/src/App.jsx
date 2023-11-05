@@ -18,7 +18,7 @@ function App() {
     async function getAllPokemons() {
       try {
         const response = await fetch(
-          `${DEV ? VITE_BACKEND_URL_DEV : VITE_BACKEND_URL_DEPLOY}/pokemons`
+          `${DEV ? VITE_BACKEND_URL_DEV : VITE_BACKEND_URL_DEPLOY}/pokefight/pokemon`
         );
         if (response.ok) {
           const data = await response.json();
