@@ -9,80 +9,109 @@ import Error from "./pages/Error";
 import PokeIndex from "./pages/PokeIndex";
 import LeaderBoard from "./pages/LeaderBoard";
 import Battle from "./pages/BattlePage";
-import {motion} from 'framer-motion';
+import { motion } from "framer-motion";
+import { getAllPokemon } from "./lib/dbClient";
 
 function App() {
   const [allEntries, setAllEntries] = useState([]);
-  const [mousePosition,setMousePosition] = useState({x:0,y:0});
-  console.log(mousePosition);
-
-
-useEffect(() => { 
-  const mouseMove = e => {
-    setMousePosition({
-      x: e.clientX,
-      y: e.clientY,
-    })
-  }
-  window.addEventListener('mousemove',mouseMove);
-  return () => {
-    window.removeEventListener('mousemove',mouseMove)
-  }
-},[]);
-
-
-const variants = {
-  default: {
-    x: mousePosition.x,
-    y: mousePosition.y
-  }
-}
-
-
-
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  // console.log(mousePosition);
 
   useEffect(() => {
-    async function getAllPokemons() {
+    const mouseMove = (e) => {
+      setMousePosition({
+        x: e.clientX,
+        y: e.clientY,
+      });
+    };
+    window.addEventListener("mousemove", mouseMove);
+    return () => {
+      window.removeEventListener("mousemove", mouseMove);
+    };
+  }, []);
+
+  const variants = {
+    default: {
+      x: mousePosition.x,
+      y: mousePosition.y,
+    },
+  };
+
+  useEffect(() => {
+    const autorun = async () => {
       try {
-        const response = await fetch('http://localhost:3000/pokefight/pokemon');
-        if (response.ok) {
-          const data = await response.json();
-          console.log(data);
-          setAllEntries(data);
-        } else {
-          throw new Error("Failed to fetch pokemons");
-        }
+        const res = await getAllPokemon();
+        setAllEntries(res);
       } catch (error) {
         console.error(error);
       }
-    }
-
-    getAllPokemons();
+    };
+    autorun();
   }, []);
 
- 
+  //? Harun's original fetch function, moved to dbClient.js
+  // useEffect(() => {
+  //   async function getAllPokemon() {
+  //     try {
+  //       const response = await fetch("http://localhost:8989/pokefight/pokemon");
+  //       if (response.ok) {
+  //         const data = await response.json();
+  //         console.log("🟢🐰 Pokémon fetched!");
+  //         setAllEntries(data);
+  //       } else {
+  //         throw new Error("🛑🐰 Failed to fetch pokémon");
+  //       }
+  //     } catch (error) {
+  //       console.error(error);
+  //     }
+  //   }
+
+  //   getAllPokemon();
+  // }, []);
+
+  // const getSinglePokemon = async (id) => {
+  //   const response
+  // };
 
   return (
     <>
-    <div>
-      <motion.div className="cursor" variants={variants} animate='default' ></motion.div>
-   
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Layout />}>
-        <Route index element={allEntries.length ? <Home allEntries={allEntries} /> : null} />
-          <Route path="login" element={<Login />} />
-          <Route path="signup" element={<SignUp />} />
-          {/*<Route path="search"element={<SearchPage searchValue={searchValue} />}/>*/}
-          <Route path="leaderboard" element={<LeaderBoard />} />
-          <Route path="pokemons" element={<PokeIndex allEntries={allEntries} />} />
-          <Route path="pokemons/:pokemonId" element={<PokemonPage allEntries={allEntries} />} />
-          <Route path="pokemons/:pokemonId/battle" element={<Battle allEntries={allEntries} />} />
-          <Route path="*" element={<Error />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
-    </div>
+      <div>
+        <motion.div
+          className="cursor"
+          variants={variants}
+          animate="default"
+        ></motion.div>
+
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Layout />}>
+              <Route
+                index
+                element={
+                  allEntries.length ? <Home allEntries={allEntries} /> : null
+                }
+              />
+              <Route path="login" element={<Login />} />
+              <Route path="signup" element={<SignUp />} />
+              {/*<Route path="search"element={<SearchPage searchValue={searchValue} />}/>*/}
+              <Route path="leaderboard" element={<LeaderBoard />} />
+              <Route
+                path="pokemon"
+                element={<PokeIndex allEntries={allEntries} />}
+              />
+              <Route
+                path="pokemon/:id"
+                element={<PokemonPage allEntries={allEntries} />}
+              />
+              <Route
+                path="pokemon/:id/battle"
+                element={<Battle allEntries={allEntries} />}
+              />
+              <Route path="*" element={<Error />} />
+            </Route>
+          </Routes>
+        </BrowserRouter>
+      </div>
     </>
   );
 }
