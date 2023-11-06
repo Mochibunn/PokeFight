@@ -6,11 +6,14 @@ import chalkMsg from './lib/chalk.js';
 import errorHandler from './middleware/errorHandler.js'
 import userRoute from './routes/userRoute.js';
 import './db/mongooseClient.js';
+import cors from 'cors';
 
 
 const app = express();
 app.use(json());
 const PORT = process.env.PORT || 3000;
+
+app.use(cors());
 
 app.get('/', async (req, res) => {
     console.log('\n📍Connection event:\n👀🐰 Client requested root')
