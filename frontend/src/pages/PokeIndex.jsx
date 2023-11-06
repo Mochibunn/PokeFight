@@ -1,12 +1,13 @@
 /* eslint-disable react/prop-types */
 import BGImage from '../assets/images/PixelBG.png';
-import { Input } from "@nextui-org/react";
 import { Tabs, Tab, CardBody } from "@nextui-org/react";
 import { Card } from '@nextui-org/react';
 import CardSection from '../components/CardSection';
 import { useState } from 'react';
 import CustomPagination from '../components/CustomPagination';
 import PokemonCard from '../components/PokemonCard';
+import SearchBar from '../components/Search';
+
 
 export default function PokeIndex({ allEntries }) {
   const itemsPerPage = 10;
@@ -21,9 +22,9 @@ export default function PokeIndex({ allEntries }) {
       <div className="w-full bg-cover bg-no-repeat relative aspect-video" style={{ backgroundImage: `url(${BGImage})` }}>
         <div className="flex w-full flex-col">
           <Tabs className='flex flex-col glassmorphism-input'>
-            <Tab key="music" title="Pokeindex" className='flex flex-col glassmorphism-input'>
+            <Tab key="music" title="Pokeindex" >
               <div>
-                <Input type="text" placeholder="Search..." className='glassmorphism-input'/>
+                <SearchBar type="text" placeholder="Search..." className='glassmorphism-input'/>
                 {allEntries.length === 0 ? <div>Loading...</div> : (
                   <>
                     <CardSection
