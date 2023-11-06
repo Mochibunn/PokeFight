@@ -12,7 +12,7 @@ const navigate = useNavigate();
         <>
     <div className="w-full bg-cover bg-no-repeat relative aspect-video " style={{ backgroundImage: `url(${BGImage})`}}>
       <div className="flex flex-col gap-5 items-center justify-center h-screen">
-        <Button onClick={() => navigate('/pokemons')}  className="custome-cursor glassmorphism-button text-black rounded-full p-4 mb-2 bg-opacity-60" style={{ fontFamily: 'G1', backdropFilter: 'blur(10px)' , fontSize:'3rem', width:'400px'}}>
+        <Button onClick={() => navigate('/pokemon')}  className="custome-cursor glassmorphism-button text-black rounded-full p-4 mb-2 bg-opacity-60" style={{ fontFamily: 'G1', backdropFilter: 'blur(10px)' , fontSize:'3rem', width:'400px'}}>
           New Game
         </Button>
        {/*} <Button className="glassmorphism-button rounded-full p-10 mb-2" style={{ fontFamily: 'G1' , color:'black', fontSize:'3rem'}}>
