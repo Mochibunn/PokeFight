@@ -8,7 +8,7 @@ const getAllPokemon = async (req, res, next) => {
     chalk(`grey`, `\n📍Fetch event`);
     chalk(`white`, `👀🐰 Client requested Pokémon data`);
     const pkmn = await data();
-    chalk(`white`, `👀🐰 Fetching sprites`);
+    chalk(`white`, `👀🐰 Fetching sprites..`);
     const pokemonWithSprites = await Promise.all(
       pkmn.map(async (pokemon) => {
         const spriteUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${pokemon.id}.svg`;
