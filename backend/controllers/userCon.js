@@ -7,7 +7,7 @@ const createUser = async (req, res, next) => {
     if (!userName ||  !password)
       throw new ErrorStatus('Please provide all required field', 400);
     const newUser = await userModel.create({
-      firstName,
+      userName,
       password
     });
 
@@ -17,5 +17,31 @@ const createUser = async (req, res, next) => {
   }
 };
 
+const getAllUsers = async (req, res, next) => {
+  try {
+    const allUsers = await userModel.find() //.populate('leaderBoard');
+    return res.json(allUsers);
+  } catch (error) {
+    next(error);
+  }
+};
 
-export default createUser;
+const getOneUser = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+
+    if (!id) throw new ErrorStatus('Invalid Id', 400);
+
+    const findUser = await userModel.findById(id) //.populate('leaderBoard');
+
+    return res.json(findUser);
+  } catch (error) {
+    next(error);
+  }
+};
+
+
+export { createUser,
+          getAllUsers,
+          getOneUser
+};

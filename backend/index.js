@@ -6,7 +6,7 @@ import chalkMsg from './lib/chalk.js';
 import errorHandler from './middleware/errorHandler.js'
 import userRoute from './routes/userRoute.js';
 import './db/mongooseClient.js';
-
+import leaderRoute from './routes/leaderRoute.js'
 
 const app = express();
 app.use(json());
@@ -20,6 +20,8 @@ app.get('/', async (req, res) => {
 app.use('/pokefight', pokemonRoute);
 
 app.use('/user', userRoute);
+
+app.use('/leaderBoard', leaderRoute);
 
 app.use(errorHandler);
 
