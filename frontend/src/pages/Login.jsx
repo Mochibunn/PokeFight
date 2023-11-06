@@ -1,65 +1,105 @@
 import BGImage from '../assets/images/PixelBG.png';
 import { Input, Button } from "@nextui-org/react";
-import { useNavigate } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
+import { useState } from 'react';
 import axios from 'axios';
+
+const backend = import.meta.env.VITE_BACKEND;
 
 export default function Login() {
   const [form, setForm] = useState({
-    firstName: "",
+    userName: "",
     password: "",
   });
 
-  const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setForm((prev) => ({ ...prev, [name]: value }));
   };
 
-  const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    fetchData();
-  };
-
-  const fetchData = async () => {
+  const getUserData = async () => {
     try {
-      const response = await axios.get('USER VALIDATION API');
-      const { firstName, password } = response.data;
-      if (form.firstName === firstName && form.password === password) {
-        navigate('/pokemons');
-      } else {
-        setError('Invalid firstname or password');
-      }
+      const response = await axios.get(`${backend}/user/all`);
+      return response.data;
     } catch (error) {
-      console.error('Error fetching data:', error);
-      setError('An error occurred while validating your credentials');
+      console.error('Error fetching user data:', error);
+      return [];
     }
   };
+  
 
-  useEffect(() => {
-    fetchData();
-  }, []); 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+  
+    try {
+      const userData = await getUserData();
+      const foundUser = userData.find((user) => user.userName === form.userName && user.password === form.password);
+  
+      if (foundUser) {
+        navigate('/pokemon');
+      } else {
+        setError('Invalid username or password');
+      }
+    } catch (error) {
+      console.error('Error logging in:', error);
+      if (error.response) {
+        console.log(error.response.data);
+        console.log(error.response.status);
+      }
+    }
+  };
+  
 
   return (
     <>
       <div className="w-full bg-cover bg-no-repeat relative aspect-video" style={{ backgroundImage: `url(${BGImage})` }}>
         <form onSubmit={handleSubmit} autoComplete="off" action="">
-          <div className='flex flex-col gap-5 items-center justify-center h-screen'>
+          <div className="flex items-center justify-center h-screen">
+            <div className="glassmorphism-container flex flex-col items-center gap-5">
+              <Input
+                isRequired
+                type="text"
+                label="Username"
+                placeholder="Enter your username"
+                className="glassmorphism-input"
+                name="userName"
+                value={form.userName}
+                onChange={handleChange}
+              />
 
-            <Input isRequired type="text" label="First name" placeholder="Enter your first name" className='glassmorphism-input' style={{ width: '400px' }} name="firstName" value={form.firstName} onChange={handleChange} />
-
-            <Input isRequired type="password" label="Password" placeholder="Enter your password" className='glassmorphism-input' style={{ width: '400px' }} name="password" value={form.password} onChange={handleChange} />
-
-            <div className="flex flex-row gap-5 items-center justify-center h-screen">
-              <Button className="glassmorphism-button text-black rounded-full p-4" style={{ fontFamily: 'G1', fontSize: '3rem', width: '400px' }} type="submit">
+              <Input
+                isRequired
+                type="password"
+                label="Password"
+                placeholder="Enter your password"
+                className="glassmorphism-input"
+                name="password"
+                value={form.password}
+                onChange={handleChange}
+              />
+               <Link to="/signup">Don't have an account? Sign up</Link>
+              <div className='flex flex-row gap-5'>
+              <Button
+                onSubmit={handleSubmit}
+                className="glassmorphism-button text-black rounded-full p-4"
+                style={{ fontFamily: 'G1', fontSize: '3rem' }}
+                type="submit"
+              >
                 Start
               </Button>
-              <Button className="glassmorphism-button text-black rounded-full p-4" style={{ fontFamily: 'G1', fontSize: '3rem', width: '400px' }}>
-                Skip
-              </Button>
+              <Button
+              onClick={() => navigate('/pokemon')}
+              className="glassmorphism-button text-black rounded-full"
+              style={{ fontFamily: 'G1', fontSize: '3rem'}}
+               >
+                 Skip
+               </Button>
+             
+</div>
+             
             </div>
           </div>
         </form>

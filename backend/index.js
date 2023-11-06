@@ -8,6 +8,7 @@ import "./db/mongooseClient.js";
 import leaderRoute from "./routes/leaderRoute.js";
 import cors from 'cors';
 
+
 const app = express();
 app.use(json());
 app.use(cors({ origin: "*" }));
