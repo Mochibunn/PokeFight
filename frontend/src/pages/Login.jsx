@@ -18,16 +18,12 @@ export default function Login() {
   };
 
   const navigate = useNavigate();
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    fetchData();
-  };
-
-  const fetchData = async () => {
     try {
-      const response = await axios.get('USER VALIDATION API');
+      const response = await axios.get('http://localhost:3000/user/all');
       const { firstName, password } = response.data;
+  
       if (form.firstName === firstName && form.password === password) {
         navigate('/pokemons');
       } else {
@@ -38,10 +34,8 @@ export default function Login() {
       setError('An error occurred while validating your credentials');
     }
   };
-
-  useEffect(() => {
-    fetchData();
-  }, []); 
+  
+ 
 
   return (
     <>
@@ -53,11 +47,11 @@ export default function Login() {
 
             <Input isRequired type="password" label="Password" placeholder="Enter your password" className='glassmorphism-input' style={{ width: '400px' }} name="password" value={form.password} onChange={handleChange} />
 
-            <div className="flex flex-row gap-5 items-center justify-center h-screen">
-              <Button className="glassmorphism-button text-black rounded-full p-4" style={{ fontFamily: 'G1', fontSize: '3rem', width: '400px' }} type="submit">
+            <div  className="flex flex-row gap-5 items-center justify-center h-screen">
+              <Button onSubmit={handleSubmit} className="glassmorphism-button text-black rounded-full p-4" style={{ fontFamily: 'G1', fontSize: '3rem', width: '400px' }} type="submit">
                 Start
               </Button>
-              <Button className="glassmorphism-button text-black rounded-full p-4" style={{ fontFamily: 'G1', fontSize: '3rem', width: '400px' }}>
+              <Button onClick={() => navigate('/pokemons')}   className="glassmorphism-button text-black rounded-full p-4" style={{ fontFamily: 'G1', fontSize: '3rem', width: '400px' }}>
                 Skip
               </Button>
             </div>
