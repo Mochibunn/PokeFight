@@ -125,7 +125,8 @@ const PokemonPage = () => {
           </div>
           {/* CTA buttons */}
           <div className="flex justify-evenly mt-8">
-            <Button>Go Back</Button>
+            <Button
+             onClick={() => navigate('/pokemon')}>Go Back</Button>
             <Button>Select</Button>
           </div>
         </div>

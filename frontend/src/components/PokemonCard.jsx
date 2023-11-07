@@ -1,8 +1,11 @@
 /* eslint-disable react/prop-types */
 import { Card, CardBody, Image, Skeleton } from "@nextui-org/react";
+import { Link } from "react-router-dom";
 
-export default function PokemonCard({ sprite, name, isLoading }) {
+export default function PokemonCard({ id,sprite, name, isLoading }) {
+ 
   return (
+    <Link to={`/pokemon/${id}`} style={{ textDecoration: 'none' }}>
     <Card
       shadow="sm"
       isPressable
@@ -20,7 +23,7 @@ export default function PokemonCard({ sprite, name, isLoading }) {
               radius="lg"
               width="100%"
               alt={name.english}
-              className="w-full object-fit h-[210px]"
+              className="w-full object-fit h-[180px]"
               src={sprite}
             />
           <div
@@ -33,5 +36,6 @@ export default function PokemonCard({ sprite, name, isLoading }) {
         )}
       </CardBody>
     </Card>
+    </Link>
   );
 }

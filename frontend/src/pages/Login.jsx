@@ -33,15 +33,15 @@ export default function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
     try {
       const userData = await getUserData();
+  
       const foundUser = userData.find((user) => user.userName === form.userName && user.password === form.password);
   
       if (foundUser) {
-        navigate('/pokemon');
+        navigate(`/pokemon?userName=${form.userName}`); // Include user's name in the URL
       } else {
-        setError('Invalid username or password');
+        console.error('Invalid username or password');
       }
     } catch (error) {
       console.error('Error logging in:', error);
@@ -80,7 +80,7 @@ export default function Login() {
                 value={form.password}
                 onChange={handleChange}
               />
-               <Link to="/signup">Don't have an account? Sign up</Link>
+               <Link to="/signup">Dont have an account? Sign up</Link>
               <div className='flex flex-row gap-5'>
               <Button
                 onSubmit={handleSubmit}

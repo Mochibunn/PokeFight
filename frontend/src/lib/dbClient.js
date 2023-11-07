@@ -21,4 +21,16 @@ const getSinglePokemon = async (id) => {
   }
 };
 
-export { getAllPokemon, getSinglePokemon };
+const getLeaderBoardData = async () => {
+try {
+  const {response} = await axios.get(`${import.meta.env.VITE_BACKEND}/leaderBoard/wins`);
+ console.log("🟢🐰 All leader board data is fetched!");
+ return response;
+} catch (error) {
+  console.error('Failed to fetch leaderboard data:', error);
+}
+};
+
+
+
+export { getAllPokemon, getSinglePokemon, getLeaderBoardData };

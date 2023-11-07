@@ -10,10 +10,11 @@ import PokeIndex from "./pages/PokeIndex";
 import LeaderBoard from "./pages/LeaderBoard";
 import Battle from "./pages/BattlePage";
 import { motion } from "framer-motion";
-import { getAllPokemon } from "./lib/dbClient";
+import { getAllPokemon,getLeaderBoardData } from "./lib/dbClient";
 
 function App() {
   const [allEntries, setAllEntries] = useState([]);
+  const [leaderboardData, setLeaderboardData] = useState([]);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   // console.log(mousePosition);
 
@@ -42,6 +43,18 @@ function App() {
       try {
         const res = await getAllPokemon();
         setAllEntries(res);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    autorun();
+  }, []);
+
+  useEffect(() => {
+    const autorun = async () => {
+      try {
+        const res = await getLeaderBoardData();
+        setLeaderboardData(res);
       } catch (error) {
         console.error(error);
       }
@@ -97,7 +110,7 @@ function App() {
               <Route path="leaderboard" element={<LeaderBoard />} />
               <Route
                 path="pokemon"
-                element={<PokeIndex allEntries={allEntries} />}
+                element={<PokeIndex allEntries={allEntries} leaderboardData={leaderboardData} />}
               />
               <Route
                 path="pokemon/:id"
@@ -111,6 +124,7 @@ function App() {
             </Route>
           </Routes>
         </BrowserRouter>
+       
       </div>
     </>
   );
