@@ -18,7 +18,7 @@ app.get('/', async (req, res) => {
     return res.json({ "🟢🐰": "Success!" });
 });
 
-app.use("/pokefight", pokemonRoute);
+app.use("/pokemon", pokemonRoute);
 
 app.use("/user", userRoute);
 
