@@ -1,54 +1,87 @@
 /* eslint-disable react/prop-types */
 import BGImage from '../assets/images/PixelBG.png';
-import { Input } from "@nextui-org/react";
-import { Tabs, Tab, CardBody } from "@nextui-org/react";
-import { Card } from '@nextui-org/react';
+import { Tabs, Tab } from "@nextui-org/react";
 import CardSection from '../components/CardSection';
-import { useState } from 'react';
+import { useState, useEffect } from 'react'; // Import useEffect
 import CustomPagination from '../components/CustomPagination';
 import PokemonCard from '../components/PokemonCard';
+import SearchBar from '../components/Search';
+import PokeCollection from './PokeCollection';
+import { useLocation } from 'react-router-dom';
+import Leaderboard from './LeaderBoard';
+import LoadingPage from '../components/LoadingPage';
+import Logo from '../components/Logo';
 
-export default function PokeIndex({ allEntries }) {
+export default function PokeIndex({ allEntries, leaderboardData }) {
+  const [loading, setLoading] = useState(true);
+  
   const itemsPerPage = 10;
   const [currentPage, setCurrentPage] = useState(1);
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const userName = searchParams.get('userName');
 
-  const handlePageChange = (newPage) => {
-    setCurrentPage(newPage);
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const handleSearch = (query) => {
+    setSearchQuery(query);
   };
+
+  const filteredEntries = allEntries.filter((entry) =>
+    entry.name.english.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  const dataToDisplay = searchQuery ? filteredEntries : allEntries;
+
+ 
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false); 
+    }, 2000); 
+  }, []);
 
   return (
     <>
-      <div className="w-full bg-cover bg-no-repeat relative aspect-video" style={{ backgroundImage: `url(${BGImage})` }}>
-        <div className="flex w-full flex-col">
-          <Tabs className='flex flex-col glassmorphism-input'>
-            <Tab key="music" title="Pokeindex" className='flex flex-col glassmorphism-input'>
-              <div>
-                <Input type="text" placeholder="Search..." className='glassmorphism-input'/>
-                {allEntries.length === 0 ? <div>Loading...</div> : (
-                  <>
+      {loading ? ( 
+        <LoadingPage />
+      ) : (
+        
+        <div className="w-full bg-cover bg-no-repeat relative aspect-video" style={{ backgroundImage: `url(${BGImage})` }}>
+          <Logo/>
+          <div className='text-center'>
+        
+            <h1>You better catch em all {userName ? userName : null}!</h1>
+          </div>
+          <div className="flex flex-col my-20">
+            <Tabs className='flex flex-col w-full'>
+              <Tab key="pokedex" title="Pokedex" style={{borderRadius: '10px'}}>
+                <div className='flex flex-row items-start justify-center'>
+                  <SearchBar type="text" placeholder="Search..." className='flex flex-col' onSearch={handleSearch} />
+                  <div>
                     <CardSection
-                      data={allEntries.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)}
-                      component={PokemonCard} 
+                      data={dataToDisplay.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)}
+                      component={PokemonCard}
                     />
-                    <CustomPagination
-                      total={Math.ceil(allEntries.length / itemsPerPage)}
-                      current={currentPage}
-                      onChange={handlePageChange}
-                    />
-                  </>
-                )}
-              </div>
-            </Tab>
-            <Tab key="videos" title="Leader Score" className='bg-transparent flex flex-col glassmorphism-input'>
-              <Card>
-                <CardBody>
-                  Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                </CardBody>
-              </Card>
-            </Tab>
-          </Tabs>
-        </div>
-      </div>
+                  </div>
+                </div>
+                <CustomPagination
+                  total={Math.ceil(dataToDisplay.length / itemsPerPage)}
+                  current={currentPage}
+                  onChange={(newPage) => setCurrentPage(newPage)}
+                />
+              </Tab>
+              <Tab key="pokecollection" title="Poke Collection" className='' style={{ borderRadius: '10px' }}>
+    <PokeCollection/>
+  </Tab>
+              <Tab key="leaderboard" title="Leader Board" className='flex flex-col' style={{borderRadius: '10px'}}>
+                <Leaderboard leaderboardData={leaderboardData} />
+              </Tab>
+            </Tabs>
+          </div>
+          
+          </div>
+        
+      )}
     </>
   );
 }
