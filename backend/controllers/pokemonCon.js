@@ -5,9 +5,26 @@ import chalk from "../lib/chalk.js";
 
 const getAllPokemon = async (req, res, next) => {
   try {
+    const { type } = req.query;
+    if (type ) {
+      const typesArr = type.split(",")
+      console.log(type, typesArr)
+      const pokemonByType = data().filter(pokemon => { 
+          for (let singleType of typesArr) {
+          return pokemon.type.includes(singleType)
+        }});
+        const pokemonWithSprites = pokemonByType.map((pokemon) => {
+          return {
+            ...pokemon,
+            sprite: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${pokemon.id}.svg`,
+          };
+        })
+        return res.json(pokemonWithSprites);
+       
+    }
     chalk(`grey`, `\n📍Fetch event`);
     chalk(`white`, `👀🐰 Client requested Pokémon data`);
-    const pkmn = await data();
+    const pkmn = data();
     chalk(`white`, `👀🐰 Fetching sprites..`);
     const pokemonWithSprites = await Promise.all(
       pkmn.map(async (pokemon) => {

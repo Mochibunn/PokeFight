@@ -11,7 +11,7 @@ const createUser = async (req, res, next) => {
       password
     });
 
-    return res.json(newUser);
+    return res.status(201).json(newUser);
   } catch (error) {
     next(error);
   }
@@ -19,7 +19,7 @@ const createUser = async (req, res, next) => {
 
 const getAllUsers = async (req, res, next) => {
   try {
-    const allUsers = await userModel.find() //.populate('leaderBoard');
+    const allUsers = await userModel.find() 
     return res.json(allUsers);
   } catch (error) {
     next(error);
@@ -32,7 +32,7 @@ const getOneUser = async (req, res, next) => {
 
     if (!id) throw new ErrorStatus('Invalid Id', 400);
 
-    const findUser = await userModel.findById(id) //.populate('leaderBoard');
+    const findUser = await userModel.findById(id) 
 
     return res.json(findUser);
   } catch (error) {
@@ -41,7 +41,30 @@ const getOneUser = async (req, res, next) => {
 };
 
 
+const updateLowscore = async (req, res, next) => {
+  try {
+  
+    return res.json();
+  } catch (error) {
+    next(error);
+  }
+};
+
+const updateHighscore = async (req, res, next) => {
+  try {
+   
+    return res.json();
+  } catch (error) {
+    next(error);
+  }
+};
+
+
+
+
 export { createUser,
           getAllUsers,
-          getOneUser
+          getOneUser,
+          updateHighscore,
+          updateLowscore
 };

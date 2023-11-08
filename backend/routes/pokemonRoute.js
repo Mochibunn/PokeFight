@@ -4,9 +4,10 @@ import getSinglePokemon from '../controllers/getOneCon.js';
 
 const pokemonRoute = express.Router();
 
-pokemonRoute.route('/pokemon').get(getAllPokemon);
+pokemonRoute.route('/').get(getAllPokemon);
 pokemonRoute
-  .route('/pokemon/:id')
+  .route('/:id')
   .get(getSinglePokemon);
+
 
 export default pokemonRoute;
