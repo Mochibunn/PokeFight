@@ -31,6 +31,16 @@ try {
 }
 };
 
+const getPokemonCollection = async () => {
+  try {
+    const {response} = await axios.get(`${import.meta.env.VITE_BACKEND}/pokemon/collection`);
+   console.log("🟢🐰 All collection data is fetched!");
+   return response;
+  } catch (error) {
+    console.error('Failed to fetch collection data:', error);
+  }
+  };
 
 
-export { getAllPokemon, getSinglePokemon, getLeaderBoardData };
+
+export { getAllPokemon, getSinglePokemon, getLeaderBoardData,getPokemonCollection };

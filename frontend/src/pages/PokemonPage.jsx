@@ -2,8 +2,10 @@ import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { getSinglePokemon } from "../lib/dbClient";
 import { Button, Card, CardBody, Image, Progress } from "@nextui-org/react";
+import Logo from "../components/Logo";
 import LoadingPage from "../components/LoadingPage";
 import Parse from "../components/typeMap";
+import BGImage from '../assets/images/PixelBG.png';
 
 const PokemonPage = () => {
   const navigate = useNavigate();
@@ -31,11 +33,14 @@ const PokemonPage = () => {
       {!loaded ? (
         <LoadingPage />
       ) : (
-        <div className="flex-column justify-center mt-12">
-          {/* Image + stats */}
+        <div className="w-full bg-cover bg-no-repeat relative aspect-video" style={{ backgroundImage: `url(${BGImage})` }}>
+    
+    <Logo/>
+        <div className="flex-col items-center justify-center h-screen" style={{marginTop:'100px'}}>
+          
           <div className="flex justify-center p-0 my-0 mx-auto w-full">
             <div className="pr-2">
-              <Card>
+              <Card className="glassmorphism-card">
                 <CardBody className="p-0">
                   <Image
                     className="aspect-square h-[300px]"
@@ -125,11 +130,14 @@ const PokemonPage = () => {
           </div>
           {/* CTA buttons */}
           <div className="flex justify-evenly mt-8">
-            <Button
+            <Button  style={{ fontFamily: 'G1', fontSize: '1rem' , backgroundColor: '#ffcc01' }}
              onClick={() => navigate('/pokemon')}>Go Back</Button>
-            <Button>Select</Button>
+            <Button  style={{ fontFamily: 'G1', fontSize: '1rem' , backgroundColor: '#ffcc01' }}>Add to Collection</Button>
+            <Button  style={{ fontFamily: 'G1', fontSize: '1rem' , backgroundColor: '#ffcc01' }} onClick={() => navigate('/pokemon/arena')}>Battle</Button>
           </div>
         </div>
+        </div>
+        
       )}
     </>
   );

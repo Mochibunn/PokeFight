@@ -8,7 +8,8 @@ import SignUp from "./pages/SignUp";
 import Error from "./pages/Error";
 import PokeIndex from "./pages/PokeIndex";
 import LeaderBoard from "./pages/LeaderBoard";
-import Battle from "./pages/BattlePage";
+import Battle from "./pages/Battle";
+import Arena from './pages/Arena';
 import { motion } from "framer-motion";
 import { getAllPokemon,getLeaderBoardData } from "./lib/dbClient";
 
@@ -97,17 +98,23 @@ function App() {
 
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<Layout />}>
+            <Route 
+            path="/" 
+            element={<Layout />}>
               <Route
                 index
-                element={
-                  allEntries.length ? <Home allEntries={allEntries} /> : null
-                }
+                element={allEntries.length ? <Home allEntries={allEntries} /> : null}
               />
-              <Route path="login" element={<Login />} />
-              <Route path="signup" element={<SignUp />} />
+              <Route 
+              path="login" 
+              element={<Login />} />
+              <Route 
+              path="signup" 
+              element={<SignUp />} />
               {/*<Route path="search"element={<SearchPage searchValue={searchValue} />}/>*/}
-              <Route path="leaderboard" element={<LeaderBoard />} />
+              <Route 
+              path="leaderboard" 
+              element={<LeaderBoard />} />
               <Route
                 path="pokemon"
                 element={<PokeIndex allEntries={allEntries} leaderboardData={leaderboardData} />}
@@ -117,10 +124,16 @@ function App() {
                 element={<PokemonPage allEntries={allEntries} />}
               />
               <Route
-                path="pokemon/:id/battle"
+                path="pokemon/battle"
                 element={<Battle allEntries={allEntries} />}
               />
-              <Route path="*" element={<Error />} />
+               <Route
+                path="pokemon/arena"
+                element={<Arena allEntries={allEntries} />}
+              />
+              <Route 
+              path="*" 
+              element={<Error />} />
             </Route>
           </Routes>
         </BrowserRouter>

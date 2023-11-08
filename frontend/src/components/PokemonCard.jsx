@@ -2,8 +2,9 @@
 import { Card, CardBody, Image, Skeleton } from "@nextui-org/react";
 import { Link } from "react-router-dom";
 
+
 export default function PokemonCard({ id,sprite, name, isLoading }) {
- 
+   
   return (
     <Link to={`/pokemon/${id}`} style={{ textDecoration: 'none' }}>
     <Card
@@ -19,11 +20,10 @@ export default function PokemonCard({ id,sprite, name, isLoading }) {
         ) : (
           <>
             <Image
-              shadow="sm"
               radius="lg"
               width="100%"
               alt={name.english}
-              className="w-full object-fit h-[180px]"
+              className="w-[180px] object-fit h-[180px]"
               src={sprite}
             />
           <div
