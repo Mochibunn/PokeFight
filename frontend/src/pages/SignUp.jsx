@@ -35,7 +35,7 @@ export default function SignUp() {
     try {
       const response = await axios.post(`${backend}/user/login`, form);
       console.log(response.data);
-      if (response.status === 200) {
+      if (response.status === 201) {
         navigate(`/pokemon?userName=${form.userName}`); 
         
       }

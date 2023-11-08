@@ -133,7 +133,7 @@ const PokemonPage = () => {
             <Button  style={{ fontFamily: 'G1', fontSize: '1rem' , backgroundColor: '#ffcc01' }}
              onClick={() => navigate('/pokemon')}>Go Back</Button>
             <Button  style={{ fontFamily: 'G1', fontSize: '1rem' , backgroundColor: '#ffcc01' }}>Add to Collection</Button>
-            <Button  style={{ fontFamily: 'G1', fontSize: '1rem' , backgroundColor: '#ffcc01' }} onClick={() => navigate('/pokemon/arena')}>Battle</Button>
+            <Button  style={{ fontFamily: 'G1', fontSize: '1rem' , backgroundColor: '#ffcc01' }}  onClick={() => navigate(`/pokemon/arena/${id}`)} >Battle</Button>
           </div>
         </div>
         </div>

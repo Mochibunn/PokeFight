@@ -37,7 +37,7 @@ export default function PokeIndex({ allEntries, leaderboardData }) {
   useEffect(() => {
     setTimeout(() => {
       setLoading(false); 
-    }, 2000); 
+    }, 1000); 
   }, []);
 
   return (

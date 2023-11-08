@@ -18,7 +18,7 @@ const handleSkipVideo = () => {
 useEffect(() => {
   setTimeout(() => {
     setLoading(false); 
-  }, 15000); 
+  }, 1000); 
 }, []);
 
 

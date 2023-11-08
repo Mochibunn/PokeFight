@@ -20,6 +20,40 @@ const playerSchema = new Schema(
         'must contain at least one uppercase letter, one lowercase letter, one number and be between 8 and 20 characters long',
       ],
     },
+    NumOfWonGames: {
+      type: Number,
+      required: true,
+      min: 0,
+      default: 0
+    },
+    NumOfLostGames: {
+        type: Number,
+        required: true,
+        min: 0,
+        default: 0
+      },
+    /*  collection: {
+    "id": 1,
+    "name": {
+      "english": "Bulbasaur",
+      "japanese": "フシギダネ",
+      "chinese": "妙蛙种子",
+      "french": "Bulbizarre"
+    },
+    "type": [
+      "Grass",
+      "Poison"
+    ],
+    "base": {
+      "HP": 45,
+      "Attack": 49,
+      "Defense": 49,
+      "Sp. Attack": 65,
+      "Sp. Defense": 65,
+      "Speed": 45
+    }
+  },
+      },*/
     active: {
       type: Boolean,
       default: true,

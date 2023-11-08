@@ -13,12 +13,6 @@ export default function PokeCollection() {
   const itemsPerPage = 10;
   const [currentPage, setCurrentPage] = useState(1);
 
-  const [searchQuery, setSearchQuery] = useState('');
-
-  const handleSearch = (query) => {
-    setSearchQuery(query);
-  };
-
   useEffect(() => {
     const mockData = [
         {
@@ -40,7 +34,8 @@ export default function PokeCollection() {
               "Sp. Attack": 65,
               "Sp. Defense": 65,
               "Speed": 45
-            }
+            },
+            "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/1.svg",
           },
           {
             "id": 2,
@@ -61,7 +56,8 @@ export default function PokeCollection() {
               "Sp. Attack": 80,
               "Sp. Defense": 80,
               "Speed": 60
-            }
+            },
+            "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/2.svg",
           },
     ];
 
@@ -71,7 +67,18 @@ export default function PokeCollection() {
     }, 2000);
   }, []);
 
-  const dataToDisplay = collectionData;
+  
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const handleSearch = (query) => {
+    setSearchQuery(query);
+  };
+
+  const filteredEntries = collectionData.filter((entry) =>
+    entry.name.english.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  const dataToDisplay = searchQuery ? filteredEntries : collectionData;
 
   return (
     <div>

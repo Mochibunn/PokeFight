@@ -11,11 +11,10 @@ import LeaderBoard from "./pages/LeaderBoard";
 import Battle from "./pages/Battle";
 import Arena from './pages/Arena';
 import { motion } from "framer-motion";
-import { getAllPokemon,getLeaderBoardData } from "./lib/dbClient";
+import { getAllPokemon } from "./lib/dbClient";
 
 function App() {
   const [allEntries, setAllEntries] = useState([]);
-  const [leaderboardData, setLeaderboardData] = useState([]);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   // console.log(mousePosition);
 
@@ -51,17 +50,7 @@ function App() {
     autorun();
   }, []);
 
-  useEffect(() => {
-    const autorun = async () => {
-      try {
-        const res = await getLeaderBoardData();
-        setLeaderboardData(res);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    autorun();
-  }, []);
+ 
 
   //? Harun's original fetch function, moved to dbClient.js
   // useEffect(() => {
@@ -117,7 +106,7 @@ function App() {
               element={<LeaderBoard />} />
               <Route
                 path="pokemon"
-                element={<PokeIndex allEntries={allEntries} leaderboardData={leaderboardData} />}
+                element={<PokeIndex allEntries={allEntries} />}
               />
               <Route
                 path="pokemon/:id"
@@ -128,7 +117,7 @@ function App() {
                 element={<Battle allEntries={allEntries} />}
               />
                <Route
-                path="pokemon/arena"
+                path="pokemon/arena/:id"
                 element={<Arena allEntries={allEntries} />}
               />
               <Route 
