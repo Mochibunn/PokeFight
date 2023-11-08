@@ -1,28 +1,19 @@
+/* eslint-disable react/prop-types */
 import { useState } from 'react';
-import axios from 'axios';
 
-const backend = import.meta.env.VITE_BACKEND;
-
-export default function SearchBar() {
+export default function SearchBar({ onSearch }) {
   const [query, setQuery] = useState('');
-  const [searchResults, setSearchResults] = useState([]);
+
 
   const handleInputChange = (e) => {
     const inputValue = e.target.value;
     setQuery(inputValue);
-    console.log('Query:', inputValue);
-    searchPokemon(inputValue);
-  }
-  
-  const searchPokemon = async (query) => {
-    try {
-      const { data } = await axios.get(`${backend}/pokefight/pokemon?q=${query}`);
-      console.log('API Response:', data);
-      setSearchResults(data);
-    } catch (error) {
-      console.error(`Failed to fetch pokémon for search term: ${query}`, error);
+    if (inputValue) {
+      onSearch(inputValue);
+    } else {
+      onSearch('');
     }
-  }
+  };
 
   return (
     <div className="search-container">
@@ -31,12 +22,9 @@ export default function SearchBar() {
         placeholder="Search..."
         value={query}
         onChange={handleInputChange}
+        style={{ width: '250px', borderRadius: '10px',marginLeft: '-5px', marginTop:'5px' }}
+        className='px-3 py-1'
       />
-      <div id="search-results">
-        {searchResults.map((result, index) => (
-          <div key={index}>{result.name}</div>
-        ))}
-      </div>
     </div>
   );
 }

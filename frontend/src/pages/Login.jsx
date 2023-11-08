@@ -3,6 +3,7 @@ import { Input, Button } from "@nextui-org/react";
 import { useNavigate, Link } from 'react-router-dom';
 import { useState } from 'react';
 import axios from 'axios';
+import Logo from '../components/Logo';
 
 const backend = import.meta.env.VITE_BACKEND;
 
@@ -33,15 +34,15 @@ export default function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
     try {
       const userData = await getUserData();
+  
       const foundUser = userData.find((user) => user.userName === form.userName && user.password === form.password);
   
       if (foundUser) {
-        navigate('/pokemon');
+        navigate(`/pokemon?userName=${form.userName}`); // Include user's name in the URL
       } else {
-        setError('Invalid username or password');
+        console.error('Invalid username or password');
       }
     } catch (error) {
       console.error('Error logging in:', error);
@@ -56,6 +57,7 @@ export default function Login() {
   return (
     <>
       <div className="w-full bg-cover bg-no-repeat relative aspect-video" style={{ backgroundImage: `url(${BGImage})` }}>
+        <Logo/>
         <form onSubmit={handleSubmit} autoComplete="off" action="">
           <div className="flex items-center justify-center h-screen">
             <div className="glassmorphism-container flex flex-col items-center gap-5">
@@ -64,7 +66,7 @@ export default function Login() {
                 type="text"
                 label="Username"
                 placeholder="Enter your username"
-                className="glassmorphism-input"
+                className=""
                 name="userName"
                 value={form.userName}
                 onChange={handleChange}
@@ -75,25 +77,25 @@ export default function Login() {
                 type="password"
                 label="Password"
                 placeholder="Enter your password"
-                className="glassmorphism-input"
+                className=""
                 name="password"
                 value={form.password}
                 onChange={handleChange}
               />
-               <Link to="/signup">Don't have an account? Sign up</Link>
+               <Link to="/signup">Dont have an account? Sign up</Link>
               <div className='flex flex-row gap-5'>
               <Button
                 onSubmit={handleSubmit}
-                className="glassmorphism-button text-black rounded-full p-4"
-                style={{ fontFamily: 'G1', fontSize: '3rem' }}
+                className="text-black rounded-full p-10 mt-5 mb-5"
+                style={{ fontFamily: 'G1', fontSize: '2rem' , backgroundColor: '#ffcc01' }}
                 type="submit"
               >
                 Start
               </Button>
               <Button
               onClick={() => navigate('/pokemon')}
-              className="glassmorphism-button text-black rounded-full"
-              style={{ fontFamily: 'G1', fontSize: '3rem'}}
+              className="text-black rounded-full p-10 mt-5 mb-5"
+              style={{ fontFamily: 'G1', fontSize: '2rem' , backgroundColor: '#ffcc01' }}
                >
                  Skip
                </Button>
