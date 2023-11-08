@@ -1,9 +1,11 @@
 import { useNavigate } from 'react-router-dom';
 import ArenaBG from '../assets/images/pokemonarena.webp';
 import { Button } from "@nextui-org/react";
+import { useParams } from 'react-router-dom';
 
 const Arena = () => {
 const navigate = useNavigate();
+const {id} = useParams();
 
   return (
     <div className='relative w-full h-screen bg-cover bg-no-repeat bg-center' style={{ backgroundImage: `url(${ArenaBG})` }}>

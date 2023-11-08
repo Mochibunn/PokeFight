@@ -21,34 +21,48 @@ export default function PokeCollection() {
 
   useEffect(() => {
     const mockData = [
-      {
-        id: 1,
-        name: 'Pikachu',
-        sprite: 'pikachu.png',
-        type: 'Electric',
-        base: {
-          HP: 35,
-          Attack: 55,
-          Defense: 40,
-          'Sp. Attack': 50,
-          'Sp. Defense': 50,
-          Speed: 90,
-        },
-      },
-      {
-        id: 2,
-        name: 'Charizard',
-        sprite: 'charizard.png',
-        type: 'Fire/Flying',
-        base: {
-          HP: 78,
-          Attack: 84,
-          Defense: 78,
-          'Sp. Attack': 109,
-          'Sp. Defense': 85,
-          Speed: 100,
-        },
-      },
+        {
+            "id": 1,
+            "name": {
+              "english": "Bulbasaur",
+              "japanese": "フシギダネ",
+              "chinese": "妙蛙种子",
+              "french": "Bulbizarre"
+            },
+            "type": [
+              "Grass",
+              "Poison"
+            ],
+            "base": {
+              "HP": 45,
+              "Attack": 49,
+              "Defense": 49,
+              "Sp. Attack": 65,
+              "Sp. Defense": 65,
+              "Speed": 45
+            }
+          },
+          {
+            "id": 2,
+            "name": {
+              "english": "Ivysaur",
+              "japanese": "フシギソウ",
+              "chinese": "妙蛙草",
+              "french": "Herbizarre"
+            },
+            "type": [
+              "Grass",
+              "Poison"
+            ],
+            "base": {
+              "HP": 60,
+              "Attack": 62,
+              "Defense": 63,
+              "Sp. Attack": 80,
+              "Sp. Defense": 80,
+              "Speed": 60
+            }
+          },
     ];
 
     setTimeout(() => {
