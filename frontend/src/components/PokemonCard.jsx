@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 export default function PokemonCard({ id,sprite, name, isLoading }) {
    
   return (
+    <>
     <Link to={`/pokemon/${id}`} style={{ textDecoration: 'none' }}>
     <Card
       shadow="sm"
@@ -37,5 +38,8 @@ export default function PokemonCard({ id,sprite, name, isLoading }) {
       </CardBody>
     </Card>
     </Link>
+<Link to={`/pokemon/pokecollection/${id}`} style={{ textDecoration: 'none' }}></Link>
+</>
+
   );
 }

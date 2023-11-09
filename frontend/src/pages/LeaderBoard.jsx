@@ -6,7 +6,7 @@ import { useState,useEffect } from 'react';
 
 const Leaderboard = () => {
    
-    const [leaderboardData, setLeaderboardData] = useState( {});
+    const [leaderboardData, setLeaderboardData] = useState([]);
 
     useEffect(() => {
       const autorun = async () => {
@@ -19,6 +19,8 @@ const Leaderboard = () => {
       };
       autorun();
     },[] );
+
+
 { /*  const mockLeaderboardData = [
         {
           _id: '6548e856d376b0dae31a78e4',
@@ -55,7 +57,7 @@ const Leaderboard = () => {
       ]; 
     */}
 
-    console.log(leaderboardData);
+
 
 
   return (
@@ -68,17 +70,13 @@ const Leaderboard = () => {
         <TableColumn>Created At</TableColumn>
       </TableHeader>
       <TableBody>
-      {leaderboardData ? (
-  leaderboardData.map((item, index) => (
+  { leaderboardData &&  (leaderboardData.map((item, index) => (
     <TableRow key={index}>
       <TableCell>{item.userName}</TableCell>
       <TableCell>{item.NumOfWonGames}</TableCell>
       <TableCell>{item.createdAt}</TableCell>
     </TableRow>
-  ))
-) : (
-  <p>Loading...</p> // or any other loading indicator
-)}
+  )))}
      { /* {mockLeaderboardData.map((item, index) => (
           <TableRow key={index}>
             <TableCell>{item.userName}</TableCell>

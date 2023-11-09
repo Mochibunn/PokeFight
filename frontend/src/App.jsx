@@ -10,6 +10,7 @@ import PokeIndex from "./pages/PokeIndex";
 import LeaderBoard from "./pages/LeaderBoard";
 import Battle from "./pages/Battle";
 import Arena from './pages/Arena';
+import SinglePokeCollection from './pages/SinglePokeCollection';
 import { motion } from "framer-motion";
 import { getAllPokemon } from "./lib/dbClient";
 
@@ -111,6 +112,10 @@ function App() {
               <Route
                 path="pokemon/:id"
                 element={<PokemonPage allEntries={allEntries} />}
+              />
+              <Route
+                path="pokemon/pokecollection/:id"
+                element={<SinglePokeCollection allEntries={allEntries} />}
               />
               <Route
                 path="pokemon/battle"

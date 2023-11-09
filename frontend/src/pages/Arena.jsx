@@ -9,12 +9,16 @@ import Logo from '../components/Logo';
 
 
 
+
 // eslint-disable-next-line react/prop-types
 const Arena = ({allEntries} ) => {
 const [pokemonData, setPokemonData] = useState(null);
 const [opponent, setOpponent] = useState(null);
 const [ifWon, setifWon] = useState(null);
 const [showWon, setshowWon] = useState(false);
+const [isSaved, setIsSaved] = useState(false);
+const [showSave,setshowSave] = useState(false);
+const [isBattled, setisBattled] = useState(false);
 
 const navigate = useNavigate();
 const {id} = useParams();
@@ -35,18 +39,27 @@ useEffect(() => {
     const randomIndex = Math.floor(Math.random() * allEntries.length);
     const randomOpponent = allEntries[randomIndex];
     setOpponent(randomOpponent);
-    setshowWon(false)
+    setshowWon(false);
+    setIsSaved(false);
+    setisBattled(false);
+    setshowSave(false)
   };
 
   const compareHP = () =>{ 
     if (pokemonData.base.HP > opponent.base.HP) {
      console.log('You won');
      setifWon(true);
-     setshowWon(true)
+     setshowWon(true);
+     setIsSaved(false);
+     setshowSave(true);
+     setisBattled(true)
     } else {
       console.log('You lost');
       setifWon(false);
-      setshowWon(true)
+      setshowWon(true);
+      setIsSaved(false);
+      setshowSave(true);
+      setisBattled(true)
     }
   }
 
@@ -54,7 +67,10 @@ useEffect(() => {
     chooseOpponent();
   }, []);
   
-
+  const handleSave = () => {
+    console.log('Battle result saved!');
+    setIsSaved(true);
+  };
 
   return (
     <div className='relative w-full h-screen bg-cover bg-no-repeat bg-center' style={{ backgroundImage: `url(${ArenaBG})` }}>
@@ -75,6 +91,10 @@ ifWon ? <h1>You Won :D </h1> : <h1>You Lost </h1> )
 </> 
 ) 
 }
+{isSaved ? (<><h1 style={{fontSize: '1rem'}}>'Your game has been saved'</h1>
+<Button  onClick={() => navigate('/pokemon')}
+          className="text-black rounded-full px-10 py-5"
+          style={{ fontFamily: 'G1', fontSize: '1rem', backgroundColor: '#ffcc01' }}>Go to LeaderBoard</Button></> ) : ''}
       </div> 
      
 <div className='flex justify-between gap-20 absolute bottom-10 left-1/2 transform -translate-x-1/2'>
@@ -97,8 +117,19 @@ ifWon ? <h1>You Won :D </h1> : <h1>You Lost </h1> )
           className="text-black rounded-full px-10 py-5"
           style={{ fontFamily: 'G1', fontSize: '1rem', backgroundColor: '#ffcc01' }}
         >
-         Battle
+        {isBattled ? 'Re-Battle' : 'Battle'}
         </Button>
+        {isSaved
+  ? ''
+  : showSave && (
+      <Button
+        onClick={handleSave}
+        className="text-black rounded-full px-10 py-5"
+        style={{ fontFamily: 'G1', fontSize: '1rem', backgroundColor: '#ffcc01' }}
+      >
+        Save
+      </Button>
+    )}
 </div>
       <div className='flex justify-between'>
 

@@ -132,10 +132,10 @@ const PokemonPage = () => {
           <div className="flex justify-evenly mt-8">
             <Button  style={{ fontFamily: 'G1', fontSize: '1rem' , backgroundColor: '#ffcc01' }}
              onClick={() => navigate('/pokemon')}>Go Back</Button>
-            <Button  style={{ fontFamily: 'G1', fontSize: '1rem' , backgroundColor: '#ffcc01' }}>Add to Collection</Button>
-            {/*<Button  style={{ fontFamily: 'G1', fontSize: '1rem' , backgroundColor: '#ffcc01' }}  onClick={() => navigate(`/pokemon/arena/${id}`)} >Battle</Button>*/}
+           { /* <Button  style={{ fontFamily: 'G1', fontSize: '1rem' , backgroundColor: '#ffcc01' }}>Add to Collection</Button> */}
+            <Button  style={{ fontFamily: 'G1', fontSize: '1rem' , backgroundColor: '#ffcc01' }}  onClick={() => navigate(`/pokemon/arena/${id}`)} >Battle</Button>
           </div>
-        </div>z
+        </div>
         </div>
         
       )}
