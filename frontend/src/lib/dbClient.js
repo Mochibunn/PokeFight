@@ -22,26 +22,30 @@ const getSinglePokemon = async (id) => {
 };
 
 const getLeaderBoardData = async () => {
-try {
-  const {response} = await axios.get(`${import.meta.env.VITE_BACKEND}/user/all`);
- console.log("🟢🐰 All leader board data is fetched!");
- return response;
-} catch (error) {
-  console.error('Failed to fetch leaderboard data:', error);
-}
+  try {
+    const response = await axios.get(`${backend}/user/all`);
+    console.log("🟢🐰 Leaderboard data fetched!");
+    return response.data;
+  } catch (error) {
+    console.error("🛑🐰 Failed to fetch leaderboard data", error);
+  }
 };
 
 const getPokemonCollection = async () => {
   try {
-    const {response} = await axios.get(`${import.meta.env.VITE_BACKEND}/pokemon/collection`);
-   console.log("🟢🐰 All collection data is fetched!");
-   return response;
-   
+    const { response } = await axios.get(
+      `${import.meta.env.VITE_BACKEND}/pokemon/collection`
+    );
+    console.log("🟢🐰 All collection data is fetched!");
+    return response;
   } catch (error) {
-    console.error('Failed to fetch collection data:', error);
+    console.error("Failed to fetch collection data:", error);
   }
-  };
+};
 
-
-
-export { getAllPokemon, getSinglePokemon, getLeaderBoardData,getPokemonCollection };
+export {
+  getAllPokemon,
+  getSinglePokemon,
+  getLeaderBoardData,
+  getPokemonCollection,
+};
