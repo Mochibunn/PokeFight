@@ -40,7 +40,7 @@ export default function Login() {
       const foundUser = userData.find((user) => user.userName === form.userName && user.password === form.password);
   
       if (foundUser) {
-        navigate(`/pokemon?userName=${form.userName}`); // Include user's name in the URL
+        navigate(`/pokemon?userName=${form.userName}`); 
       } else {
         console.error('Invalid username or password');
       }

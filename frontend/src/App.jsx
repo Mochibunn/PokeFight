@@ -7,12 +7,13 @@ import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import Error from "./pages/Error";
 import PokeIndex from "./pages/PokeIndex";
-import LeaderBoard from "./pages/LeaderBoard";
 import Battle from "./pages/Battle";
 import Arena from './pages/Arena';
 import SinglePokeCollection from './pages/SinglePokeCollection';
 import { motion } from "framer-motion";
 import { getAllPokemon } from "./lib/dbClient";
+
+
 
 function App() {
   const [allEntries, setAllEntries] = useState([]);
@@ -101,10 +102,6 @@ function App() {
               <Route 
               path="signup" 
               element={<SignUp />} />
-              {/*<Route path="search"element={<SearchPage searchValue={searchValue} />}/>*/}
-              <Route 
-              path="leaderboard" 
-              element={<LeaderBoard />} />
               <Route
                 path="pokemon"
                 element={<PokeIndex allEntries={allEntries} />}
