@@ -3,7 +3,7 @@ const backend = import.meta.env.VITE_BACKEND;
 
 const getAllPokemon = async () => {
   try {
-    const { data } = await axios.get(`${backend}/pokefight/pokemon`);
+    const { data } = await axios.get(`${backend}/pokemon`);
     console.log("🟢🐰 All pokémon fetched!");
     return data;
   } catch (error) {
@@ -14,7 +14,7 @@ const getAllPokemon = async () => {
 const getSinglePokemon = async (id) => {
   try {
     if (!+id) throw new Error(`🔢 ID must be an integer value`);
-    const { data } = await axios.get(`${backend}/pokefight/pokemon/${id}`);
+    const { data } = await axios.get(`${backend}/pokemon/${id}`);
     return data;
   } catch (error) {
     return `🛑🐰 Ack! An error!\n`, error;
@@ -23,7 +23,7 @@ const getSinglePokemon = async (id) => {
 
 const getLeaderBoardData = async () => {
 try {
-  const {response} = await axios.get(`${import.meta.env.VITE_BACKEND}/leaderBoard/wins`);
+  const {response} = await axios.get(`${import.meta.env.VITE_BACKEND}/leaderboard`);
  console.log("🟢🐰 All leader board data is fetched!");
  return response;
 } catch (error) {
@@ -36,6 +36,7 @@ const getPokemonCollection = async () => {
     const {response} = await axios.get(`${import.meta.env.VITE_BACKEND}/pokemon/collection`);
    console.log("🟢🐰 All collection data is fetched!");
    return response;
+   
   } catch (error) {
     console.error('Failed to fetch collection data:', error);
   }

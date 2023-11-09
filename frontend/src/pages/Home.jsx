@@ -11,17 +11,26 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
 const navigate = useNavigate();
 
+const handleSkipVideo = () => {
+  navigate('/');
+};
+
 useEffect(() => {
   setTimeout(() => {
     setLoading(false); 
-  }, 20000); 
+  }, 1000); 
 }, []);
 
 
     return (
         <>
           {loading ? ( 
-        <IntroVideo />
+           <div className="intro-container">
+           <IntroVideo />
+           <Button onClick={handleSkipVideo} className="skip-button">
+             Skip Intro
+           </Button>
+         </div>
       ) : ( 
         
     <div className="w-full bg-cover bg-no-repeat relative aspect-video " style={{ backgroundImage: `url(${BGImage})`}}>

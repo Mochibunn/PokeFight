@@ -107,6 +107,14 @@ html, body {
   animation: neonGlow linear infinite;
 }
 
+.neon-light {
+  filter: drop-shadow(0 0 10px #00ff00);
+}
+
+.neon-light-opponent{
+  filter: drop-shadow(0 0 10px #0000ff);
+}
+
 @keyframes neonGlow {
   0% {
     box-shadow: 0 0 10px rgba(255, 255, 255, 0.7), 0 0 20px rgba(255, 255, 255, 0.7), 0 0 30px rgba(255, 255, 255, 0.7);
