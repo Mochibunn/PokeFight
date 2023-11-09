@@ -40,25 +40,59 @@ const getOneUser = async (req, res, next) => {
   }
 };
 
-
+/* {
 const updateLowscore = async (req, res, next) => {
   try {
-  
-    return res.json();
+    const { id } = req.params;
+
+    if (!id) {
+      throw new ErrorStatus('Invalid parameters', 400);
+    }
+
+    const user = await userModel.findByIdAndUpdate(
+      id,
+      { $inc: { NumOfWonGames: -1 } },
+      { new: true }
+    );
+
+    if (!user) {
+      throw new ErrorStatus('User not found', 404);
+    }
+
+    if (user.NumOfWonGames < 0) {
+      user.NumOfWonGames = 0; 
+    }
+
+    return res.status(200).json(user);
   } catch (error) {
     next(error);
   }
 };
+*/
 
 const updateHighscore = async (req, res, next) => {
   try {
-   
-    return res.json();
+    const { id } = req.params;
+
+    if (!id) {
+      throw new ErrorStatus('Invalid parameters', 400);
+    }
+
+    const user = await userModel.findByIdAndUpdate(
+      id,
+      { $inc: { NumOfWonGames: 1 } },
+      { new: true }
+    );
+
+    if (!user) {
+      throw new ErrorStatus('User not found', 404);
+    }
+
+    return res.status(200).json(user);
   } catch (error) {
     next(error);
   }
 };
-
 
 
 
@@ -66,5 +100,5 @@ export { createUser,
           getAllUsers,
           getOneUser,
           updateHighscore,
-          updateLowscore
+          
 };

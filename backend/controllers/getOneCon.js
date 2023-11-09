@@ -31,4 +31,6 @@ const getSinglePokemon = async (req, res, next) => {
   }
 };
 
+
+
 export default getSinglePokemon;
