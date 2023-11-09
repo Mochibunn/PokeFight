@@ -11,7 +11,6 @@ import Logo from '../components/Logo';
 
 // eslint-disable-next-line react/prop-types
 const Arena = ({allEntries} ) => {
-const [loaded, setLoaded] = useState(false);
 const [pokemonData, setPokemonData] = useState(null);
 const [opponent, setOpponent] = useState(null);
 
@@ -24,7 +23,6 @@ useEffect(() => {
       getSinglePokemon(id).then((data) => {
         console.log(`🟢🐰 Single pokémon fetched!`);
         setPokemonData(data);
-        setLoaded(true);
       });
     } catch (error) {
       console.error(`🛑🐰 Oops, that's an error!\n`, error.message);
