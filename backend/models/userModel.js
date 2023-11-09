@@ -1,5 +1,94 @@
 import { Schema, model } from 'mongoose';
 
+
+
+const pokemonSchema = new Schema({
+  id: {
+    type: Number,
+    required: true,
+    min: 0,
+    default: 25
+  },
+  name: {
+    english:{type: String,
+        required: true,
+        unique: true,
+        maxlength: 20,
+        match: [
+          /^[a-zA-Z-\s]+$/,
+          'must contain only letters and up to 20 characters',
+        ],},
+    japanese: {type: String,
+        required: true,
+        unique: true,
+        maxlength: 20},
+    chinese: {type: String,
+        required: true,
+        unique: true,
+        maxlength: 20,},
+    french: {type: String,
+        required: true,
+        unique: true,
+        maxlength: 20,
+        match: [
+          /^[a-zA-Z-\s]+$/,
+          'must contain only letters and up to 20 characters',
+        ],},
+        sprite: {
+          type: String
+        },
+  },
+  type:
+  {type: [String],
+    required: true,
+    unique: true,
+    maxlength: 20,
+    match: [
+      /^[a-zA-Z-\s]+$/,
+      'must contain only letters and up to 20 characters',
+    ],},
+  base: {
+    HP: {
+        type: Number,
+        required: true,
+        min: 0
+      },
+    Attack: {
+        type: Number,
+        required: true,
+        min: 0
+      },
+    Defense:{
+        type: Number,
+        required: true,
+        min: 0
+      },
+    'Sp. Attack': {
+        type: Number,
+        required: true,
+        min: 0
+      },
+    'Sp. Defense': {
+        type: Number,
+        required: true,
+        min: 0
+      },
+    Speed:{
+        type: Number,
+        required: true,
+        min: 0
+      },
+  },    
+  sprite: {
+    type: String,
+}
+}
+);
+const collection = model('Pokemon', pokemonSchema);
+
+
+
+
 const playerSchema = new Schema(
   {
     userName: {
@@ -32,28 +121,7 @@ const playerSchema = new Schema(
         min: 0,
         default: 0
       },
-    /*  collection: {
-    "id": 1,
-    "name": {
-      "english": "Bulbasaur",
-      "japanese": "フシギダネ",
-      "chinese": "妙蛙种子",
-      "french": "Bulbizarre"
-    },
-    "type": [
-      "Grass",
-      "Poison"
-    ],
-    "base": {
-      "HP": 45,
-      "Attack": 49,
-      "Defense": 49,
-      "Sp. Attack": 65,
-      "Sp. Defense": 65,
-      "Speed": 45
-    }
-  },
-      },*/
+      collection: [pokemonSchema], 
     active: {
       type: Boolean,
       default: true,
