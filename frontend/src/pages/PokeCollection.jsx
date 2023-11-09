@@ -68,7 +68,7 @@ export default function PokeCollection() {
             {collectionData.length > 0 ? (
               <CardSection
                 data={dataToDisplay.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)}
-                component={CPokemonCard}
+                component={CPokemonCard} userName={userName}
               />
             ) : (
               <p>Your Poke Collection is empty.</p>

@@ -23,7 +23,7 @@ const [isCaught, setisCaught] = useState(false);
 
 
 const navigate = useNavigate();
-const {id} = useParams();
+const {id, userName} = useParams();
 
 useEffect(() => {
     try {

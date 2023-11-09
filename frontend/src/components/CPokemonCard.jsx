@@ -3,11 +3,11 @@ import { Card, CardBody, Image, Skeleton } from "@nextui-org/react";
 import { Link } from "react-router-dom";
 
 
-export default function PokemonCard({ id,sprite, name, isLoading }) {
-   
+export default function CPokemonCard({ id,sprite, name, isLoading,userName }) {
+   console.log(userName)
   return (
     <>
-    <Link to={`/pokemon/pokecollection/${id}`} style={{ textDecoration: 'none' }}>
+    <Link to={`/pokemon/pokecollection/${id}?${userName}`} style={{ textDecoration: 'none' }}>
     <Card
       shadow="sm"
       isPressable

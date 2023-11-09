@@ -114,7 +114,7 @@ function App() {
                 element={<SinglePokeCollection allEntries={allEntries} />}
               />
                <Route
-                path="pokemon/arena/:id"
+                path="pokemon/pokecollection/arena/:id"
                 element={<Arena allEntries={allEntries} />}
               />
               <Route 

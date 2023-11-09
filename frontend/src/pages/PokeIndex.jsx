@@ -24,6 +24,8 @@ export default function PokeIndex({ allEntries, leaderboardData }) {
   const searchParams = new URLSearchParams(location.search);
   const userName = searchParams.get('userName');
 
+console.log(userName)
+
   const [searchQuery, setSearchQuery] = useState('');
 
   const handleSearch = (query) => {
@@ -77,7 +79,7 @@ export default function PokeIndex({ allEntries, leaderboardData }) {
               </Tab>
              
               <Tab key="pokecollection" title="Poke Collection" className='' style={{ borderRadius: '10px' }}>
-    <PokeCollection/>
+    <PokeCollection userName={userName}/>
   </Tab>
               <Tab key="leaderboard" title="Leader Board" className='flex flex-col' style={{borderRadius: '10px'}}>
                 <Leaderboard leaderboardData={leaderboardData} />

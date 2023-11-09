@@ -14,6 +14,8 @@ const SinglePokeCollection = () => {
   const [pokemon, setPokemon] = useState({});
   const [loaded, setLoaded] = useState(false);
 
+  console.log(userName);
+
   useEffect(() => {
     try {
       if (!+id) throw new Error(`🔢 ID must be an integer value`);
@@ -27,7 +29,9 @@ const SinglePokeCollection = () => {
     }
   }, [id]);
 
-
+  const goBackToPokeIndex = () => {
+    navigate(`/pokemon?userName=${userName}`);
+  };
 
   // console.log(`📍Debug \n👀🐰 Single pokémon info:\n`, pokemon);
 
@@ -134,9 +138,9 @@ const SinglePokeCollection = () => {
           {/* CTA buttons */}
           <div className="flex justify-evenly mt-8">
             <Button  style={{ fontFamily: 'G1', fontSize: '1rem' , backgroundColor: '#ffcc01' }}
-             onClick={() => navigate(`/pokemon?userName=${userName}`)}>Go Back</Button>
+             onClick={goBackToPokeIndex}>Go Back</Button>
            { /* <Button  style={{ fontFamily: 'G1', fontSize: '1rem' , backgroundColor: '#ffcc01' }}>Add to Collection</Button> */}
-            <Button  style={{ fontFamily: 'G1', fontSize: '1rem' , backgroundColor: '#ffcc01' }}  onClick={() => navigate(`/pokemon/arena/${id}`)} >Battle</Button>
+            <Button  style={{ fontFamily: 'G1', fontSize: '1rem' , backgroundColor: '#ffcc01' }}  onClick={() => navigate(`/pokemon/pokecollection/arena/${id}?${userName}`)} >Battle</Button>
           </div>
         </div>
         </div>
