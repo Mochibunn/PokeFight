@@ -23,7 +23,7 @@ const getSinglePokemon = async (id) => {
 
 const getLeaderBoardData = async () => {
 try {
-  const {response} = await axios.get(`${import.meta.env.VITE_BACKEND}/leaderboard`);
+  const {response} = await axios.get(`${import.meta.env.VITE_BACKEND}/user/all`);
  console.log("🟢🐰 All leader board data is fetched!");
  return response;
 } catch (error) {
