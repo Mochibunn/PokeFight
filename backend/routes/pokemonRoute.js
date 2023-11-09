@@ -9,5 +9,4 @@ pokemonRoute
   .route('/:id')
   .get(getSinglePokemon);
 
-
 export default pokemonRoute;
