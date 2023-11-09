@@ -24,6 +24,8 @@ export default function PokeIndex({ allEntries, leaderboardData }) {
   const searchParams = new URLSearchParams(location.search);
   const userName = searchParams.get('userName');
 
+console.log(userName)
+
   const [searchQuery, setSearchQuery] = useState('');
 
   const handleSearch = (query) => {
@@ -58,8 +60,8 @@ export default function PokeIndex({ allEntries, leaderboardData }) {
             <h1>You better catch em all {userName ? userName : null}!</h1>
           </div>
           <div className="flex flex-col my-20">
-            <Tabs className='flex justify-center' >
-              <Tab key="pokedex" title="Pokedex" style={{borderRadius: '10px'}} >
+            <Tabs className='flex justify-center'  >
+              <Tab key="pokedex" title="Pokedex"  >
                 <div className='flex flex-col items-center justify-center'>
                   <SearchBar type="text" placeholder="Search..." className='flex flex-col' onSearch={handleSearch} />
                   <div>
@@ -77,7 +79,7 @@ export default function PokeIndex({ allEntries, leaderboardData }) {
               </Tab>
              
               <Tab key="pokecollection" title="Poke Collection" className='' style={{ borderRadius: '10px' }}>
-    <PokeCollection/>
+    <PokeCollection userName={userName}/>
   </Tab>
               <Tab key="leaderboard" title="Leader Board" className='flex flex-col' style={{borderRadius: '10px'}}>
                 <Leaderboard leaderboardData={leaderboardData} />

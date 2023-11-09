@@ -27,6 +27,8 @@ const PokemonPage = () => {
     }
   }, [id]);
 
+  
+
   // console.log(`📍Debug \n👀🐰 Single pokémon info:\n`, pokemon);
 
   return (

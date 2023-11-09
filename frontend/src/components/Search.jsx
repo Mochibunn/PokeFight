@@ -22,7 +22,7 @@ export default function SearchBar({ onSearch }) {
         placeholder="Search..."
         value={query}
         onChange={handleInputChange}
-        style={{ width: '250px', borderRadius: '10px',marginLeft: '-5px', marginTop:'5px' }}
+        style={{ width: '250px', borderRadius: '20px',marginLeft: '-5px', marginTop:'5px' }}
         className='px-3 py-1'
       />
     </div>

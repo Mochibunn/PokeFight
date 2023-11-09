@@ -31,17 +31,16 @@ const getLeaderBoardData = async () => {
   }
 };
 
-const getPokemonCollection = async () => {
+const getPokemonCollection = async (userId) => {
   try {
-    const { response } = await axios.get(
-      `${import.meta.env.VITE_BACKEND}/pokemon/collection`
-    );
-    console.log("🟢🐰 All collection data is fetched!");
-    return response;
+    const response  = await axios.get(`${backend}/user/${userId}/collection`);
+    console.log(`Collection data for user ${userId} is fetched!`);
+    return response.data;
   } catch (error) {
     console.error("Failed to fetch collection data:", error);
   }
 };
+
 
 export {
   getAllPokemon,

@@ -1,17 +1,20 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { getSinglePokemon } from "../lib/dbClient";
+import { getSinglePokemon} from "../lib/dbClient";
 import { Button, Card, CardBody, Image, Progress } from "@nextui-org/react";
 import Logo from "../components/Logo";
 import LoadingPage from "../components/LoadingPage";
 import Parse from "../components/typeMap";
 import BGImage from '../assets/images/PixelBG.png';
 
-const PokemonPage = () => {
+
+const SinglePokeCollection = () => {
   const navigate = useNavigate();
-  const { id } = useParams();
+  const { id,userName } = useParams();
   const [pokemon, setPokemon] = useState({});
   const [loaded, setLoaded] = useState(false);
+
+  console.log(userName);
 
   useEffect(() => {
     try {
@@ -25,6 +28,10 @@ const PokemonPage = () => {
       console.error(`🛑🐰 Oops, that's an error!\n`, error.message);
     }
   }, [id]);
+
+  const goBackToPokeIndex = () => {
+    navigate(`/pokemon?userName=${userName}`);
+  };
 
   // console.log(`📍Debug \n👀🐰 Single pokémon info:\n`, pokemon);
 
@@ -131,9 +138,9 @@ const PokemonPage = () => {
           {/* CTA buttons */}
           <div className="flex justify-evenly mt-8">
             <Button  style={{ fontFamily: 'G1', fontSize: '1rem' , backgroundColor: '#ffcc01' }}
-             onClick={() => navigate('/pokemon')}>Go Back</Button>
+             onClick={goBackToPokeIndex}>Go Back</Button>
            { /* <Button  style={{ fontFamily: 'G1', fontSize: '1rem' , backgroundColor: '#ffcc01' }}>Add to Collection</Button> */}
-            <Button  style={{ fontFamily: 'G1', fontSize: '1rem' , backgroundColor: '#ffcc01' }}  onClick={() => navigate(`/pokemon/arena/${id}`)} >Battle</Button>
+            <Button  style={{ fontFamily: 'G1', fontSize: '1rem' , backgroundColor: '#ffcc01' }}  onClick={() => navigate(`/pokemon/pokecollection/arena/${id}?${userName}`)} >Battle</Button>
           </div>
         </div>
         </div>
@@ -143,4 +150,4 @@ const PokemonPage = () => {
   );
 };
 
-export default PokemonPage;
+export default SinglePokeCollection;

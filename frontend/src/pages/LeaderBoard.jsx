@@ -21,49 +21,10 @@ const Leaderboard = () => {
     },[] );
 
 
-{ /*  const mockLeaderboardData = [
-        {
-          _id: '6548e856d376b0dae31a78e4',
-          userName: 'Nora',
-          NumOfWonGames: 1,
-          createdAt: '2023-11-06T13:21:26.896+00:00',
-          updatedAt: '2023-11-06T13:21:26.896+00:00',
-          __v: 0,
-        },
-        {
-          _id: '6548e856d376b0dae31a78e5',
-          userName: 'John',
-          NumOfWonGames: 5,
-          createdAt: '2023-11-07T10:15:00.000+00:00',
-          updatedAt: '2023-11-07T10:15:00.000+00:00',
-          __v: 0,
-        },
-        {
-          _id: '6548e856d376b0dae31a78e6',
-          userName: 'Alice',
-          NumOfWonGames: 3,
-          createdAt: '2023-11-08T08:45:00.000+00:00',
-          updatedAt: '2023-11-08T08:45:00.000+00:00',
-          __v: 0,
-        },
-        {
-          _id: '6548e856d376b0dae31a78e7',
-          userName: 'Bob',
-          NumOfWonGames: 2,
-          createdAt: '2023-11-09T14:30:00.000+00:00',
-          updatedAt: '2023-11-09T14:30:00.000+00:00',
-          __v: 0,
-        },
-      ]; 
-    */}
-
-
-
-
   return (
     <div className='justify-center flex flex-col items-center'>
     <h1 className='text-center' style={{fontSize:'2rem'}}>TOP 20</h1>
-    <Table aria-label="Leaderboard Table" className='w-[800px]'>
+    <Table aria-label="Leaderboard Table" className='w-[800px] leaderboard-table ' >
       <TableHeader>
         <TableColumn>Username</TableColumn>
         <TableColumn>Wins</TableColumn>
@@ -71,18 +32,12 @@ const Leaderboard = () => {
       </TableHeader>
       <TableBody>
   { leaderboardData &&  (leaderboardData.map((item, index) => (
-    <TableRow key={index}>
+    <TableRow key={index} >
       <TableCell>{item.userName}</TableCell>
       <TableCell>{item.NumOfWonGames}</TableCell>
       <TableCell>{item.createdAt}</TableCell>
     </TableRow>
   )))}
-     { /* {mockLeaderboardData.map((item, index) => (
-          <TableRow key={index}>
-            <TableCell>{item.userName}</TableCell>
-            <TableCell>{item.NumOfWonGames}</TableCell>
-            <TableCell>{item.createdAt}</TableCell>
-     </TableRow>))} */}
        </TableBody>
     </Table>
     </div>

@@ -7,7 +7,6 @@ import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import Error from "./pages/Error";
 import PokeIndex from "./pages/PokeIndex";
-import Battle from "./pages/Battle";
 import Arena from './pages/Arena';
 import SinglePokeCollection from './pages/SinglePokeCollection';
 import { motion } from "framer-motion";
@@ -114,12 +113,8 @@ function App() {
                 path="pokemon/pokecollection/:id"
                 element={<SinglePokeCollection allEntries={allEntries} />}
               />
-              <Route
-                path="pokemon/battle"
-                element={<Battle allEntries={allEntries} />}
-              />
                <Route
-                path="pokemon/arena/:id"
+                path="pokemon/pokecollection/arena/:id"
                 element={<Arena allEntries={allEntries} />}
               />
               <Route 
