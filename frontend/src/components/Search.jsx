@@ -16,7 +16,7 @@ export default function SearchBar({ onSearch }) {
   };
 
   return (
-    <div className="search-container">
+    <div className="search-container mb-2">
       <input
         type="text"
         placeholder="Search..."

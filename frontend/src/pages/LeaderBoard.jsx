@@ -61,9 +61,9 @@ const Leaderboard = () => {
 
 
   return (
-    <>
+    <div className='justify-center flex flex-col items-center'>
     <h1 className='text-center' style={{fontSize:'2rem'}}>TOP 20</h1>
-    <Table aria-label="Leaderboard Table">
+    <Table aria-label="Leaderboard Table" className='w-[800px]'>
       <TableHeader>
         <TableColumn>Username</TableColumn>
         <TableColumn>Wins</TableColumn>
@@ -85,7 +85,7 @@ const Leaderboard = () => {
      </TableRow>))} */}
        </TableBody>
     </Table>
-    </>
+    </div>
   );
 };
 

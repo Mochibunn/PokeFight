@@ -2,7 +2,7 @@
 import BGImage from '../assets/images/PixelBG.png';
 import { Tabs, Tab } from "@nextui-org/react";
 import CardSection from '../components/CardSection';
-import { useState, useEffect } from 'react'; 
+import { useState, useEffect } from 'react'; // Import useEffect
 import CustomPagination from '../components/CustomPagination';
 import PokemonCard from '../components/PokemonCard';
 import SearchBar from '../components/Search';
@@ -14,8 +14,7 @@ import Logo from '../components/Logo';
 
 
 
-
-export default function PokeIndex({ allEntries, leaderboardData }) {
+export default function LeaderBoardIndex({ allEntries, leaderboardData }) {
   const [loading, setLoading] = useState(true);
   
   const itemsPerPage = 10;
@@ -43,8 +42,6 @@ export default function PokeIndex({ allEntries, leaderboardData }) {
     }, 1000); 
   }, []);
 
-
-
   return (
     <>
       {loading ? ( 
@@ -58,9 +55,9 @@ export default function PokeIndex({ allEntries, leaderboardData }) {
             <h1>You better catch em all {userName ? userName : null}!</h1>
           </div>
           <div className="flex flex-col my-20">
-            <Tabs className='flex justify-center' >
-              <Tab key="pokedex" title="Pokedex" style={{borderRadius: '10px'}} >
-                <div className='flex flex-col items-center justify-center'>
+            <Tabs className='flex flex-col w-full' initialActive={2}>
+              <Tab key="pokedex" title="Pokedex" style={{borderRadius: '10px'}}>
+                <div className='flex flex-row items-start justify-center'>
                   <SearchBar type="text" placeholder="Search..." className='flex flex-col' onSearch={handleSearch} />
                   <div>
                     <CardSection

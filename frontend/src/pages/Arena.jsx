@@ -85,11 +85,11 @@ useEffect(() => {
         <Logo style={{width:'100px'}}/>
       <div className='absolute left-1/2 transform -translate-x-1/2 /2 text-4xl text-white flex flex-col items-center' style={{marginTop:'140px'}}>
     {isCaught 
-    ? (<h1 className='neon-light'>Pokemon was added to your Collection!</h1>)
+    ? (<h1 className='neon-light' style={{fontSize: '1.5rem', textAlign:'center'}}>Pokemon was added<br /> to Your Collection!</h1>)
   : ''}
     
     { showWon ? ( 
-ifWon ? <h1 className='neon-light'>You Won :D </h1> : <h1 className=''neon-light-opponent>You Lost </h1> )   
+ifWon ? <h1 className='neon-light'>You Won :D </h1> : <h1 className='neon-light-opponent'>You Lost </h1> )   
 :  ( 
   <>
   { pokemonData &&
