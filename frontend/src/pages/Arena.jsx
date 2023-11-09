@@ -13,6 +13,8 @@ import Logo from '../components/Logo';
 const Arena = ({allEntries} ) => {
 const [pokemonData, setPokemonData] = useState(null);
 const [opponent, setOpponent] = useState(null);
+const [ifWon, setifWon] = useState(null);
+const [showWon, setshowWon] = useState(false);
 
 const navigate = useNavigate();
 const {id} = useParams();
@@ -33,30 +35,47 @@ useEffect(() => {
     const randomIndex = Math.floor(Math.random() * allEntries.length);
     const randomOpponent = allEntries[randomIndex];
     setOpponent(randomOpponent);
+    setshowWon(false)
   };
+
+  const compareHP = () =>{ 
+    if (pokemonData.base.HP > opponent.base.HP) {
+     console.log('You won');
+     setifWon(true);
+     setshowWon(true)
+    } else {
+      console.log('You lost');
+      setifWon(false);
+      setshowWon(true)
+    }
+  }
 
   useEffect(() => {
     chooseOpponent();
   }, []);
   
 
+
   return (
     <div className='relative w-full h-screen bg-cover bg-no-repeat bg-center' style={{ backgroundImage: `url(${ArenaBG})` }}>
         <Logo style={{width:'100px'}}/>
       <div className='absolute left-1/2 transform -translate-x-1/2 /2 text-4xl text-white flex flex-col items-center' style={{marginTop:'140px'}}>
-      
-      {pokemonData && (
-  <div>
-    <h1 className='neon-light'>{pokemonData.name.english}</h1>
-  </div>
-)}
-        Vs.
-        {opponent && (
-  <div>
-    <h1 className='neon-light-opponent' >{opponent.name.english}</h1>
-  </div>
-)}
-      </div>
+    { showWon ? ( 
+ifWon ? <h1>You Won :D </h1> : <h1>You Lost </h1> )   
+:  ( 
+  <>
+  { pokemonData &&
+<div>
+ <h1 className='neon-light'>{pokemonData.name.english} Vs.</h1>
+</div> }
+{ opponent &&
+<div>
+ <h1 className='neon-light-opponent' >{opponent.name.english}</h1>
+</div>  }
+</> 
+) 
+}
+      </div> 
      
 <div className='flex justify-between gap-20 absolute bottom-10 left-1/2 transform -translate-x-1/2'>
 <Button
@@ -74,7 +93,7 @@ useEffect(() => {
          Choose Opponent
         </Button>
         <Button
-          onClick={() => navigate('/pokemon/battle')}
+          onClick={compareHP}
           className="text-black rounded-full px-10 py-5"
           style={{ fontFamily: 'G1', fontSize: '1rem', backgroundColor: '#ffcc01' }}
         >
@@ -87,6 +106,7 @@ useEffect(() => {
       {pokemonData && (
         <div className=' mt-[300px]'>
           <img src={pokemonData.sprite} className='neon-light' style={{width:'300px',height:'300px'}}></img>
+          <h1 className='neon-light'>{pokemonData.base.hp}</h1>
         </div>
       )}
       {opponent && (

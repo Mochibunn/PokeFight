@@ -34,7 +34,7 @@ export default function Home() {
           </Button>
         </div>
       ) : ( 
-        <div className="h-full bg-cover bg-no-repeat relative aspect-video  ${showVideo ? 'loading' : ''}" style={{ backgroundImage: `url(${BGImage})`}}>
+        <div className="h-full bg-cover bg-no-repeat relative aspect-video  {showVideo ? 'loading' : ''} " style={{ backgroundImage: `url(${BGImage})`}}>
           <Logo />
           <div className="flex flex-col gap-5 items-center justify-center h-screen">
             <Button onClick={() => navigate('/pokemon')}  className="text-black rounded-full p-10" style={{ fontFamily: 'G1', fontSize: '2rem' , backgroundColor: '#ffcc01' }}>
