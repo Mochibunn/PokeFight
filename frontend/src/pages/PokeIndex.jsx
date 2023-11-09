@@ -12,6 +12,8 @@ import Leaderboard from './LeaderBoard';
 import LoadingPage from '../components/LoadingPage';
 import Logo from '../components/Logo';
 
+
+
 export default function PokeIndex({ allEntries, leaderboardData }) {
   const [loading, setLoading] = useState(true);
   
@@ -70,12 +72,14 @@ export default function PokeIndex({ allEntries, leaderboardData }) {
                   onChange={(newPage) => setCurrentPage(newPage)}
                 />
               </Tab>
+             
               <Tab key="pokecollection" title="Poke Collection" className='' style={{ borderRadius: '10px' }}>
     <PokeCollection/>
   </Tab>
               <Tab key="leaderboard" title="Leader Board" className='flex flex-col' style={{borderRadius: '10px'}}>
                 <Leaderboard leaderboardData={leaderboardData} />
               </Tab>
+             
             </Tabs>
           </div>
           

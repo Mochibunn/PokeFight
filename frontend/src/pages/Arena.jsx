@@ -19,6 +19,8 @@ const [showWon, setshowWon] = useState(false);
 const [isSaved, setIsSaved] = useState(false);
 const [showSave,setshowSave] = useState(false);
 const [isBattled, setisBattled] = useState(false);
+const [isCaught, setisCaught] = useState(false);
+
 
 const navigate = useNavigate();
 const {id} = useParams();
@@ -42,7 +44,8 @@ useEffect(() => {
     setshowWon(false);
     setIsSaved(false);
     setisBattled(false);
-    setshowSave(false)
+    setshowSave(false);
+    setisCaught(false);
   };
 
   const compareHP = () =>{ 
@@ -72,12 +75,21 @@ useEffect(() => {
     setIsSaved(true);
   };
 
+  const handleCatch = () => {
+    console.log('You caught the Pokemon!');
+    setisCaught(true);
+  };
+
   return (
     <div className='relative w-full h-screen bg-cover bg-no-repeat bg-center' style={{ backgroundImage: `url(${ArenaBG})` }}>
         <Logo style={{width:'100px'}}/>
       <div className='absolute left-1/2 transform -translate-x-1/2 /2 text-4xl text-white flex flex-col items-center' style={{marginTop:'140px'}}>
+    {isCaught 
+    ? (<h1 className='neon-light'>Pokemon was added to your Collection!</h1>)
+  : ''}
+    
     { showWon ? ( 
-ifWon ? <h1>You Won :D </h1> : <h1>You Lost </h1> )   
+ifWon ? <h1 className='neon-light'>You Won :D </h1> : <h1 className=''neon-light-opponent>You Lost </h1> )   
 :  ( 
   <>
   { pokemonData &&
@@ -112,25 +124,36 @@ ifWon ? <h1>You Won :D </h1> : <h1>You Lost </h1> )
         >
          Choose Opponent
         </Button>
-        <Button
-          onClick={compareHP}
-          className="text-black rounded-full px-10 py-5"
-          style={{ fontFamily: 'G1', fontSize: '1rem', backgroundColor: '#ffcc01' }}
-        >
-        {isBattled ? 'Re-Battle' : 'Battle'}
-        </Button>
-        {isSaved
-  ? ''
-  : showSave && (
-      <Button
-        onClick={handleSave}
-        className="text-black rounded-full px-10 py-5"
-        style={{ fontFamily: 'G1', fontSize: '1rem', backgroundColor: '#ffcc01' }}
-      >
-        Save
-      </Button>
-    )}
-</div>
+
+        {isBattled && ifWon ? (
+          <Button
+            onClick={handleCatch}
+            className="text-black rounded-full px-10 py-5"
+            style={{ fontFamily: 'G1', fontSize: '1rem', backgroundColor: '#ffcc01' }}
+          >
+            Catch Pokemon
+          </Button>
+        ) : (
+          <Button
+            onClick={compareHP}
+            className="text-black rounded-full px-10 py-5"
+            style={{ fontFamily: 'G1', fontSize: '1rem', backgroundColor: '#ffcc01' }}
+          >
+            Battle
+          </Button>
+        )}
+        {isSaved ? (
+          ''
+        ) : showSave && (
+          <Button
+            onClick={handleSave}
+            className="text-black rounded-full px-10 py-5"
+            style={{ fontFamily: 'G1', fontSize: '1rem', backgroundColor: '#ffcc01' }}
+          >
+            Save
+          </Button>
+        )}
+        </div>
       <div className='flex justify-between'>
 
            

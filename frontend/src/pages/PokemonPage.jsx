@@ -6,6 +6,7 @@ import Logo from "../components/Logo";
 import LoadingPage from "../components/LoadingPage";
 import Parse from "../components/typeMap";
 import BGImage from '../assets/images/PixelBG.png';
+import { Link } from "react-router-dom";
 
 const PokemonPage = () => {
   const navigate = useNavigate();
@@ -132,7 +133,7 @@ const PokemonPage = () => {
           <div className="flex justify-evenly mt-8">
             <Button  style={{ fontFamily: 'G1', fontSize: '1rem' , backgroundColor: '#ffcc01' }}
              onClick={() => navigate('/pokemon')}>Go Back</Button>
-            <Button  style={{ fontFamily: 'G1', fontSize: '1rem' , backgroundColor: '#ffcc01' }}>Add to Collection</Button>
+            <Link to={`/pokemon/pokecollection/${id}`} style={{ textDecoration: 'none' }}> <Button style={{ fontFamily: 'G1', fontSize: '1rem' , backgroundColor: '#ffcc01' }}>Add to Collection</Button></Link>
             {/*<Button  style={{ fontFamily: 'G1', fontSize: '1rem' , backgroundColor: '#ffcc01' }}  onClick={() => navigate(`/pokemon/arena/${id}`)} >Battle</Button>*/}
           </div>
         </div>z

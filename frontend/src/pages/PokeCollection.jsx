@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react';
 import CardSection from '../components/CardSection';
 import CustomPagination from '../components/CustomPagination';
-import PokemonCard from '../components/PokemonCard';
+import CPokemonCard from '../components/CPokemonCard';
 import SearchBar from '../components/Search';
 import LoadingPage from '../components/LoadingPage';
 
@@ -91,7 +91,7 @@ export default function PokeCollection() {
             {collectionData.length > 0 ? (
               <CardSection
                 data={dataToDisplay.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)}
-                component={PokemonCard}
+                component={CPokemonCard}
               />
             ) : (
               <p>Your Poke Collection is empty.</p>
