@@ -4,69 +4,49 @@ import CardSection from '../components/CardSection';
 import CustomPagination from '../components/CustomPagination';
 import CPokemonCard from '../components/CPokemonCard';
 import SearchBar from '../components/Search';
-import LoadingPage from '../components/LoadingPage';
+import {getLeaderBoardData, getPokemonCollection} from '../lib/dbClient';
+import { useLocation } from 'react-router-dom';
+
 
 export default function PokeCollection() {
   const [collectionData, setCollectionData] = useState([]);
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const userName = searchParams.get('userName');
+
+  const fetchData = async () => {
+    try {
+      if (!userName) throw new Error(`🔢 userName must be provided`);
+      console.log(userName);
+      const userResponse = await getLeaderBoardData();
+      const user = userResponse.find((userData) => userData.userName === userName);
+      
+      if (!user) throw new Error(`User with userName ${userName} not found`);
+      
+      const userId = user._id;
+      console.log(userId);
+     
+     
+      const collectionResponse = await getPokemonCollection(userId); 
+      if (!collectionResponse) throw new Error(`Collection data not found for user ${userName}`);
+      
+      setCollectionData(collectionResponse);
+      console.log(`🟢🐰 User data and collection fetched!`, user, collectionResponse);
+    } catch (error) {
+      console.error(`🛑🐰 Oops, that's an error!\n`, error.message);
+    }
+  };
   
+
+  useEffect(() => {
+    fetchData();
+  }, [userName]);
+
 
   const itemsPerPage = 10;
   const [currentPage, setCurrentPage] = useState(1);
 
-  useEffect(() => {
-    const mockData = [
-      {
-        "id": 1,
-        "name": {
-          "english": "Bulbasaur",
-          "japanese": "フシギダネ",
-          "chinese": "妙蛙种子",
-          "french": "Bulbizarre"
-        },
-        "type": [
-          "Grass",
-          "Poison"
-        ],
-        "base": {
-          "HP": 45,
-          "Attack": 49,
-          "Defense": 49,
-          "Sp. Attack": 65,
-          "Sp. Defense": 65,
-          "Speed": 45
-        },
-        "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/1.svg",
-      },
-      {
-        "id": 2,
-        "name": {
-          "english": "Ivysaur",
-          "japanese": "フシギソウ",
-          "chinese": "妙蛙草",
-          "french": "Herbizarre"
-        },
-        "type": [
-          "Grass",
-          "Poison"
-        ],
-        "base": {
-          "HP": 60,
-          "Attack": 62,
-          "Defense": 63,
-          "Sp. Attack": 80,
-          "Sp. Defense": 80,
-          "Speed": 60
-        },
-        "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/2.svg",
-      },
-    ];
-
-    setTimeout(() => {
-      setCollectionData(mockData);
-      setIsLoading(false);
-    }, 2000);
-  }, []);
-
+ 
   const [searchQuery, setSearchQuery] = useState('');
 
   const handleSearch = (query) => {

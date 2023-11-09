@@ -58,8 +58,8 @@ export default function PokeIndex({ allEntries, leaderboardData }) {
             <h1>You better catch em all {userName ? userName : null}!</h1>
           </div>
           <div className="flex flex-col my-20">
-            <Tabs className='flex justify-center' >
-              <Tab key="pokedex" title="Pokedex" style={{borderRadius: '10px'}} >
+            <Tabs className='flex justify-center'  >
+              <Tab key="pokedex" title="Pokedex"  >
                 <div className='flex flex-col items-center justify-center'>
                   <SearchBar type="text" placeholder="Search..." className='flex flex-col' onSearch={handleSearch} />
                   <div>

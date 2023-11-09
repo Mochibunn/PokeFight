@@ -135,6 +135,12 @@ html, body {
 
 }
 
+.leaderboard-table {
+  max-height: 450px;
+  overflow-y: auto;
+  border-radius: 20px;
+}
+
 
 
 @keyframes neonGlow {
