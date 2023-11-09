@@ -8,7 +8,27 @@ const createUser = async (req, res, next) => {
       throw new ErrorStatus('Please provide all required field', 400);
     const newUser = await userModel.create({
       userName,
-      password
+      password,
+      collection: [
+        {
+          id: 1,
+          name: {
+            english: 'Pikachu',
+            japanese: 'ピカチュウ',
+            chinese: '皮卡丘',
+            french: 'Pikachu',
+          },
+          type: 'Electric',
+          base: {
+            HP: 35,
+            Attack: 55,
+            Defense: 40,
+            'Sp. Attack': 50,
+            'Sp. Defense': 50,
+            Speed: 90,
+          },
+        },
+      ],
     });
 
     return res.status(201).json(newUser);
