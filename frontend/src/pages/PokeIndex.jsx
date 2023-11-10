@@ -7,30 +7,21 @@ import CustomPagination from '../components/CustomPagination';
 import PokemonCard from '../components/PokemonCard';
 import SearchBar from '../components/Search';
 import PokeCollection from './PokeCollection';
-import { useLocation } from 'react-router-dom';
 import Leaderboard from './LeaderBoard';
 import LoadingPage from '../components/LoadingPage';
 import Logo from '../components/Logo';
+import { useUserContext } from '../context/userContext';
 
 
 export default function PokeIndex({ allEntries, leaderboardData }) {
+const {user} = useUserContext();
+
   const [loading, setLoading] = useState(true);
   
   const itemsPerPage = 10;
   const [currentPage, setCurrentPage] = useState(1);
   
-  const location = useLocation();
-  const searchParams = new URLSearchParams(location.search);
-  const userName = searchParams.get('userName');
 
-
-  
-
-console.log(userName);
-
-if(!userName) {
-  console.log(`Error on finding ${userName}`)
-}
 
   const [searchQuery, setSearchQuery] = useState('');
 
@@ -63,7 +54,7 @@ if(!userName) {
           <Logo/>
           <div className='text-center'>
         
-            <h1>You better catch em all {userName ? userName : null}!</h1>
+            <h1>You better catch em all {user ? user.userName : null}!</h1>
           </div>
           <div className="flex flex-col my-20">
             <Tabs className='flex justify-center'  >
@@ -73,7 +64,7 @@ if(!userName) {
                   <div>
                     <CardSection
                       data={dataToDisplay.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)}
-                      component={PokemonCard} userName={userName}
+                      component={PokemonCard} 
                     />
                   </div>
                 </div>
@@ -81,15 +72,15 @@ if(!userName) {
                   total={Math.ceil(dataToDisplay.length / itemsPerPage)}
                   current={currentPage}
                   onChange={(newPage) => setCurrentPage(newPage)}
-                  userName={userName}
+                 
                 />
               </Tab>
              
               <Tab key="pokecollection" title="Poke Collection" className='' style={{ borderRadius: '10px' }}>
-    <PokeCollection userName={userName}/>
+    <PokeCollection />
   </Tab>
               <Tab key="leaderboard" title="Leader Board" className='flex flex-col' style={{borderRadius: '10px'}}>
-                <Leaderboard leaderboardData={leaderboardData} userName={userName} />
+                <Leaderboard leaderboardData={leaderboardData}  />
               </Tab>
              
             </Tabs>

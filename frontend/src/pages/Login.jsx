@@ -4,10 +4,15 @@ import { useNavigate, Link } from 'react-router-dom';
 import { useState } from 'react';
 import axios from 'axios';
 import Logo from '../components/Logo';
+import {useUserContext} from '../context/userContext';
 
 const backend = import.meta.env.VITE_BACKEND;
 
 export default function Login() {
+
+  const {setUser} = useUserContext();
+
+
   const [form, setForm] = useState({
     userName: "",
     password: "",
@@ -40,7 +45,8 @@ export default function Login() {
       const foundUser = userData.find((user) => user.userName === form.userName && user.password === form.password);
   
       if (foundUser) {
-        navigate(`/pokemon?userName=${form.userName}`); 
+        setUser(foundUser);
+        navigate(`/pokemon`); 
       } else {
         console.error('Invalid username or password');
       }

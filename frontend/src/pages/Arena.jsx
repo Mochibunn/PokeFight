@@ -4,14 +4,16 @@ import ArenaBG from '../assets/images/pokemonarena.webp';
 import { Button } from "@nextui-org/react";
 import { useParams } from 'react-router-dom';
 import { useState,useEffect } from 'react';
-import { getSinglePokemon } from '../lib/dbClient';
+import { getSinglePokemon,getLeaderBoardData,updateLeaderBoardData,updatePokemonCollection } from '../lib/dbClient';
 import Logo from '../components/Logo';
+import { useUserContext } from '../context/userContext';
 
-
+//const backend = import.meta.env.VITE_BACKEND;
 
 
 // eslint-disable-next-line react/prop-types
 const Arena = ({allEntries} ) => {
+const {user} = useUserContext();
 const [pokemonData, setPokemonData] = useState(null);
 const [opponent, setOpponent] = useState(null);
 const [ifWon, setifWon] = useState(null);
@@ -19,11 +21,46 @@ const [showWon, setshowWon] = useState(false);
 const [isSaved, setIsSaved] = useState(false);
 const [showSave,setshowSave] = useState(false);
 const [isBattled, setisBattled] = useState(false);
+const [uLeaderBoardData, setULeaderBoardData] = useState([]);
+const [uPokemonCollection, setUPokemonCollection] = useState([]);
 const [isCaught, setisCaught] = useState(false);
 
 
+
+const fetchData = async () => {
+  try {
+    if (!user) throw new Error(`🔢 Please login`);
+    const userResponse = await getLeaderBoardData();
+    const findUser = userResponse.find((userData) => userData.userName === user.userName);
+    
+    if (!findUser) throw new Error(`User with userName ${user.userName} not found`);
+    
+    const userId = user._id;
+    console.log(userId);
+   
+    const collectionResponse = await updateLeaderBoardData(userId); 
+    if (!collectionResponse) throw new Error(`Collection data not found for user ${user.userName}`);
+    setULeaderBoardData(collectionResponse);
+    console.log(`🟢🐰 Leaderboard data is updated!`, user, collectionResponse);
+    
+    const anotherResponse = await updatePokemonCollection(userId);
+    if (!anotherResponse) throw new Error(`Collection data not found for user ${user.userName}`);
+    setUPokemonCollection(anotherResponse);
+    console.log(`🟢🐰 Pokemon Collection is updated!`, user, collectionResponse);
+
+  } catch (error) {
+    console.error(`🛑🐰 Oops, that's an error!\n`, error.message);
+  }
+};
+
+useEffect(() => {
+  fetchData();
+}, [user]);
+
+
+
 const navigate = useNavigate();
-const {id, userName} = useParams();
+const {id} = useParams();
 
 useEffect(() => {
     try {
@@ -64,21 +101,23 @@ useEffect(() => {
       setshowSave(true);
       setisBattled(true)
     }
-  }
+  };
 
   useEffect(() => {
     chooseOpponent();
   }, []);
   
-  const handleSave = () => {
-    console.log('Battle result saved!');
-    setIsSaved(true);
+  const handleSave = async () => {
+     updateLeaderBoardData(uLeaderBoardData);
+      setIsSaved(true)
+  
   };
-
-  const handleCatch = () => {
-    console.log('You caught the Pokemon!');
-    setisCaught(true);
+  
+  const handleCatch = async () => {
+   updatePokemonCollection(uPokemonCollection);
+      setisCaught(true)
   };
+  
 
   return (
     <div className='relative w-full h-screen bg-cover bg-no-repeat bg-center' style={{ backgroundImage: `url(${ArenaBG})` }}>
@@ -103,10 +142,10 @@ ifWon ? <h1 className='neon-light'>You Won :D </h1> : <h1 className='neon-light-
 </> 
 ) 
 }
-{isSaved ? (<><h1 style={{fontSize: '1rem'}}>'Your game has been saved'</h1>
+{isSaved ? (<><h1 style={{fontSize: '1rem'}}>Your game has been saved</h1>
 <Button  onClick={() => navigate('/pokemon')}
           className="text-black rounded-full px-10 py-5"
-          style={{ fontFamily: 'G1', fontSize: '1rem', backgroundColor: '#ffcc01' }}>Go to LeaderBoard</Button></> ) : ''}
+          style={{ fontFamily: 'G1', fontSize: '1rem', backgroundColor: '#ffcc01' }}>Go to LeaderBoard</Button></> ) : ('')}
       </div> 
      
 <div className='flex justify-between gap-20 absolute bottom-10 left-1/2 transform -translate-x-1/2'>

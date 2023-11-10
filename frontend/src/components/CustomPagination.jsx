@@ -29,7 +29,7 @@ export default function CustomPagination({ total, current, onChange}) {
     }
   }, [current, slickRef]);
 
-  const pages = Array.from({ length: total }, (_, i) => i + 1);
+ 
 
   return (
     <div>

@@ -41,10 +41,34 @@ const getPokemonCollection = async (userId) => {
   }
 };
 
+const updateLeaderBoardData = async (userId) => {
+  try {
+    const response = await axios.put(`${backend}/user/${userId}/won`);
+    console.log("🟢🐰 Leaderboard data is updated!");
+    return response.data;
+  } catch (error) {
+    console.error("🛑🐰 Failed to update leaderboard data", error);
+  }
+};
+
+
+const updatePokemonCollection = async (userId) => {
+  try {
+    const response = await axios.put(`${backend}/user/${userId}/collection`);
+    console.log("🟢🐰 Pokemon Collection data is updated!");
+    return response.data;
+  } catch (error) {
+    console.error("🛑🐰 Failed to update pokemon collection data", error);
+  }
+};
+
+
 
 export {
   getAllPokemon,
   getSinglePokemon,
   getLeaderBoardData,
   getPokemonCollection,
-};
+  updateLeaderBoardData,
+  updatePokemonCollection
+}
