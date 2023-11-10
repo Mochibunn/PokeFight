@@ -12,6 +12,7 @@ import Arena from './pages/Arena';
 import SinglePokeCollection from './pages/SinglePokeCollection';
 import { motion } from "framer-motion";
 import { getAllPokemon } from "./lib/dbClient";
+import PokeByType from './pages/PokeByType'
 
 
 
@@ -125,6 +126,10 @@ function App() {
               <Route 
               path="*" 
               element={<Error />} />
+               <Route
+                path="pokemon/type"
+                element={<PokeByType allEntries={allEntries} />}
+              />
             </Route>
           </Routes>
         </BrowserRouter>
