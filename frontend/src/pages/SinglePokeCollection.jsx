@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate,useLocation } from "react-router-dom";
 import { getSinglePokemon} from "../lib/dbClient";
 import { Button, Card, CardBody, Image, Progress } from "@nextui-org/react";
 import Logo from "../components/Logo";
@@ -10,9 +10,14 @@ import BGImage from '../assets/images/PixelBG.png';
 
 const SinglePokeCollection = () => {
   const navigate = useNavigate();
-  const { id,userName } = useParams();
+  const { id } = useParams();
   const [pokemon, setPokemon] = useState({});
   const [loaded, setLoaded] = useState(false);
+
+
+  const location = useLocation()
+  const searchParams = new URLSearchParams(location.search);
+  const userName = searchParams.get('userName');
 
   console.log(userName);
 

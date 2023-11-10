@@ -4,7 +4,7 @@ import { getLeaderBoardData } from '../lib/dbClient';
 import { useState,useEffect } from 'react';
 
 
-const Leaderboard = () => {
+const Leaderboard = ({userName}) => {
    
     const [leaderboardData, setLeaderboardData] = useState([]);
 
@@ -32,7 +32,7 @@ const Leaderboard = () => {
       </TableHeader>
       <TableBody>
   { leaderboardData &&  (leaderboardData.map((item, index) => (
-    <TableRow key={index} >
+    <TableRow key={index} style={{ backgroundColor: item.userName === userName ? 'yellow' : 'transparent' }} >
       <TableCell>{item.userName}</TableCell>
       <TableCell>{item.NumOfWonGames}</TableCell>
       <TableCell>{item.createdAt}</TableCell>

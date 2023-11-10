@@ -1,13 +1,8 @@
 /* eslint-disable react/prop-types */
 import { Card, CardBody, Image, Skeleton } from "@nextui-org/react";
 
-
-
-export default function CPokemonCard({ sprite, name, isLoading }) {
-  
+export default function PokemonCard({ sprite, name, isLoading }) {
   return (
-    <>
-
     <Card
       shadow="sm"
       isPressable
@@ -21,10 +16,11 @@ export default function CPokemonCard({ sprite, name, isLoading }) {
         ) : (
           <>
             <Image
+              shadow="sm"
               radius="lg"
               width="100%"
               alt={name.english}
-              className="w-[180px] object-fit h-[180px]"
+              className="w-full object-fit h-[210px]"
               src={sprite}
             />
           <div
@@ -37,9 +33,5 @@ export default function CPokemonCard({ sprite, name, isLoading }) {
         )}
       </CardBody>
     </Card>
-    
-
-</>
-
   );
 }

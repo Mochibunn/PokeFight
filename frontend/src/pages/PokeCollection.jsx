@@ -5,14 +5,12 @@ import CustomPagination from '../components/CustomPagination';
 import CPokemonCard from '../components/CPokemonCard';
 import SearchBar from '../components/Search';
 import {getLeaderBoardData, getPokemonCollection} from '../lib/dbClient';
-import { useLocation } from 'react-router-dom';
 
 
-export default function PokeCollection() {
+
+export default function PokeCollection({userName}) {
   const [collectionData, setCollectionData] = useState([]);
-  const location = useLocation();
-  const searchParams = new URLSearchParams(location.search);
-  const userName = searchParams.get('userName');
+ 
 
   const fetchData = async () => {
     try {
