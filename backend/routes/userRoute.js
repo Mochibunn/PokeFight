@@ -11,7 +11,7 @@ userRoute.route('/all').get(getAllUsers);
 userRoute.route('/high').get(getLeaderBoard);
 userRoute.route('/:userName').get(getOneUser);
 userRoute.route('/:userName/won').put(updateHighscore);
-userRoute.route('/:id/collection').get(getCollection).put(editCollection);
+userRoute.route('/:userName/collection').get(getCollection).put(editCollection);
 
 
 
