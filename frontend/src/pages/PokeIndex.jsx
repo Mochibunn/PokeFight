@@ -13,18 +13,24 @@ import LoadingPage from '../components/LoadingPage';
 import Logo from '../components/Logo';
 
 
-
-
 export default function PokeIndex({ allEntries, leaderboardData }) {
   const [loading, setLoading] = useState(true);
   
   const itemsPerPage = 10;
   const [currentPage, setCurrentPage] = useState(1);
+  
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const userName = searchParams.get('userName');
 
-console.log(userName)
+
+  
+
+console.log(userName);
+
+if(!userName) {
+  console.log(`Error on finding ${userName}`)
+}
 
   const [searchQuery, setSearchQuery] = useState('');
 
@@ -67,7 +73,7 @@ console.log(userName)
                   <div>
                     <CardSection
                       data={dataToDisplay.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)}
-                      component={PokemonCard}
+                      component={PokemonCard} userName={userName}
                     />
                   </div>
                 </div>
@@ -75,6 +81,7 @@ console.log(userName)
                   total={Math.ceil(dataToDisplay.length / itemsPerPage)}
                   current={currentPage}
                   onChange={(newPage) => setCurrentPage(newPage)}
+                  userName={userName}
                 />
               </Tab>
              
@@ -82,7 +89,7 @@ console.log(userName)
     <PokeCollection userName={userName}/>
   </Tab>
               <Tab key="leaderboard" title="Leader Board" className='flex flex-col' style={{borderRadius: '10px'}}>
-                <Leaderboard leaderboardData={leaderboardData} />
+                <Leaderboard leaderboardData={leaderboardData} userName={userName} />
               </Tab>
              
             </Tabs>
