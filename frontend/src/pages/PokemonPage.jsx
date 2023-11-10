@@ -8,7 +8,10 @@ import Parse from "../components/typeMap";
 import BGImage from '../assets/images/PixelBG.png';
 import { Link } from "react-router-dom";
 
+
 const PokemonPage = () => {
+
+
   const navigate = useNavigate();
   const { id } = useParams();
   const [pokemon, setPokemon] = useState({});
@@ -28,8 +31,6 @@ const PokemonPage = () => {
   }, [id]);
 
   
-
-  // console.log(`📍Debug \n👀🐰 Single pokémon info:\n`, pokemon);
 
   return (
     <>

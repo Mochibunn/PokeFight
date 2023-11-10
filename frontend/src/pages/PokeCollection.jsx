@@ -5,28 +5,30 @@ import CustomPagination from '../components/CustomPagination';
 import CPokemonCard from '../components/CPokemonCard';
 import SearchBar from '../components/Search';
 import {getLeaderBoardData, getPokemonCollection} from '../lib/dbClient';
+import { useUserContext } from '../context/userContext';
 
 
 
-export default function PokeCollection({userName}) {
+export default function PokeCollection() {
+
+  const {user} = useUserContext();
   const [collectionData, setCollectionData] = useState([]);
  
 
   const fetchData = async () => {
     try {
-      if (!userName) throw new Error(`🔢 userName must be provided`);
-      console.log(userName);
+      if (!user) throw new Error(`🔢 Please login`);
       const userResponse = await getLeaderBoardData();
-      const user = userResponse.find((userData) => userData.userName === userName);
+      const findUser = userResponse.find((userData) => userData.userName === user.userName);
       
-      if (!user) throw new Error(`User with userName ${userName} not found`);
+      if (!findUser) throw new Error(`User with userName ${user.userName} not found`);
       
       const userId = user._id;
       console.log(userId);
      
      
       const collectionResponse = await getPokemonCollection(userId); 
-      if (!collectionResponse) throw new Error(`Collection data not found for user ${userName}`);
+      if (!collectionResponse) throw new Error(`Collection data not found for user ${user.userName}`);
       
       setCollectionData(collectionResponse);
       console.log(`🟢🐰 User data and collection fetched!`, user, collectionResponse);
@@ -38,7 +40,7 @@ export default function PokeCollection({userName}) {
 
   useEffect(() => {
     fetchData();
-  }, [userName]);
+  }, [user]);
 
 
   const itemsPerPage = 10;
@@ -66,7 +68,7 @@ export default function PokeCollection({userName}) {
             {collectionData.length > 0 ? (
               <CardSection
                 data={dataToDisplay.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)}
-                component={CPokemonCard} userName={userName}
+                component={CPokemonCard}
               />
             ) : (
               <p>Your Poke Collection is empty.</p>

@@ -1,13 +1,14 @@
 /* eslint-disable react/prop-types */
 import { Card, CardBody, Image, Skeleton } from "@nextui-org/react";
+import { Link } from "react-router-dom";
 
 
 
-export default function CPokemonCard({ sprite, name, isLoading }) {
+export default function CPokemonCard({id, sprite, name, isLoading }) {
   
   return (
-    <>
-
+ <>
+  <Link to={`/pokemon/pokecollection/${id}`} style={{ textDecoration: 'none' }}>
     <Card
       shadow="sm"
       isPressable
@@ -37,7 +38,7 @@ export default function CPokemonCard({ sprite, name, isLoading }) {
         )}
       </CardBody>
     </Card>
-    
+    </Link>
 
 </>
 

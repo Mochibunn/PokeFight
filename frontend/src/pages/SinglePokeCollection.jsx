@@ -8,18 +8,16 @@ import Parse from "../components/typeMap";
 import BGImage from '../assets/images/PixelBG.png';
 
 
+
 const SinglePokeCollection = () => {
+
   const navigate = useNavigate();
   const { id } = useParams();
   const [pokemon, setPokemon] = useState({});
   const [loaded, setLoaded] = useState(false);
 
 
-  const location = useLocation()
-  const searchParams = new URLSearchParams(location.search);
-  const userName = searchParams.get('userName');
 
-  console.log(userName);
 
   useEffect(() => {
     try {
@@ -35,7 +33,7 @@ const SinglePokeCollection = () => {
   }, [id]);
 
   const goBackToPokeIndex = () => {
-    navigate(`/pokemon?userName=${userName}`);
+    navigate(`/pokemon`);
   };
 
   // console.log(`📍Debug \n👀🐰 Single pokémon info:\n`, pokemon);
@@ -145,7 +143,7 @@ const SinglePokeCollection = () => {
             <Button  style={{ fontFamily: 'G1', fontSize: '1rem' , backgroundColor: '#ffcc01' }}
              onClick={goBackToPokeIndex}>Go Back</Button>
            { /* <Button  style={{ fontFamily: 'G1', fontSize: '1rem' , backgroundColor: '#ffcc01' }}>Add to Collection</Button> */}
-            <Button  style={{ fontFamily: 'G1', fontSize: '1rem' , backgroundColor: '#ffcc01' }}  onClick={() => navigate(`/pokemon/pokecollection/arena/${id}?${userName}`)} >Battle</Button>
+            <Button  style={{ fontFamily: 'G1', fontSize: '1rem' , backgroundColor: '#ffcc01' }}  onClick={() => navigate(`/pokemon/pokecollection/arena/${id}`)} >Battle</Button>
           </div>
         </div>
         </div>

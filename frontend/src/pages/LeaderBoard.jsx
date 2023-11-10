@@ -2,9 +2,11 @@
 import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from '@nextui-org/react';
 import { getLeaderBoardData } from '../lib/dbClient';
 import { useState,useEffect } from 'react';
+import { useUserContext } from '../context/userContext';
 
 
-const Leaderboard = ({userName}) => {
+const Leaderboard = () => {
+  const {user} = useUserContext ();
    
     const [leaderboardData, setLeaderboardData] = useState([]);
 
@@ -32,7 +34,7 @@ const Leaderboard = ({userName}) => {
       </TableHeader>
       <TableBody>
   { leaderboardData &&  (leaderboardData.map((item, index) => (
-    <TableRow key={index} style={{ backgroundColor: item.userName === userName ? 'yellow' : 'transparent' }} >
+    <TableRow key={index} style={{ backgroundColor: item.userName === user.userName ? 'yellow' : 'transparent' }} >
       <TableCell>{item.userName}</TableCell>
       <TableCell>{item.NumOfWonGames}</TableCell>
       <TableCell>{item.createdAt}</TableCell>
