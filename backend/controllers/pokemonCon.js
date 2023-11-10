@@ -17,6 +17,10 @@ const getAllPokemon = async (req, res, next) => {
           return {
             ...pokemon,
             sprite: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${pokemon.id}.svg`,
+            name: pokemon.name,
+            type: pokemon.type,
+            id: pokemon.id,
+            base: pokemon.base,
           };
         })
         return res.json(pokemonWithSprites);

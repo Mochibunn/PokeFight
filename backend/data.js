@@ -13288,7 +13288,7 @@ const data = () => {
       "Speed": 99
     }
   },
-  {
+/*  {
     "id": 650,
     "name": {
       "english": "Chespin",
@@ -16583,7 +16583,7 @@ const data = () => {
       "Sp. Defense": 65,
       "Speed": 34
     }
-  }
+  }   */
 ] ;
 return pkmn;
 };

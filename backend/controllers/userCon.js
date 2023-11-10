@@ -48,11 +48,11 @@ const getAllUsers = async (req, res, next) => {
 
 const getOneUser = async (req, res, next) => {
   try {
-    const { id } = req.params;
+    const { userName } = req.params;
 
-    if (!id) throw new ErrorStatus('Invalid Id', 400);
+    if (!userName) throw new ErrorStatus('Invalid Id', 400);
 
-    const findUser = await userModel.findById(id) 
+    const findUser = await userModel.findOne({userName}) 
 
     return res.json(findUser);
   } catch (error) {
@@ -92,14 +92,14 @@ const updateLowscore = async (req, res, next) => {
 
 const updateHighscore = async (req, res, next) => {
   try {
-    const { id } = req.params;
+    const { userName } = req.params;
 
-    if (!id) {
+    if (!userName) {
       throw new ErrorStatus('Invalid parameters', 400);
     }
 
-    const user = await userModel.findByIdAndUpdate(
-      id,
+    const user = await userModel.findOneAndUpdate(
+      {userName},
       { $inc: { NumOfWonGames: 1 } },
       { new: true }
     );

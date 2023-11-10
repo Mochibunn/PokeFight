@@ -63,12 +63,12 @@ const pokemonSchema = new Schema({
         required: true,
         min: 0
       },
-    'Sp. Attack': {
+    "Sp. Attack": {
         type: Number,
         required: true,
         min: 0
       },
-    'Sp. Defense': {
+    "Sp. Defense": {
         type: Number,
         required: true,
         min: 0
