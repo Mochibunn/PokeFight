@@ -4,7 +4,7 @@ import { getSinglePokemon} from "../lib/dbClient";
 import { Button, Card, CardBody, Image, Progress } from "@nextui-org/react";
 import Logo from "../components/Logo";
 import LoadingPage from "../components/LoadingPage";
-import Parse from "../components/typeMap";
+import Parse from "../components/TypeMap";
 import BGImage from '../assets/images/PixelBG.png';
 
 
@@ -43,12 +43,12 @@ const SinglePokeCollection = () => {
       {!loaded ? (
         <LoadingPage />
       ) : (
-        <div className="w-full bg-cover bg-no-repeat relative aspect-video" style={{ backgroundImage: `url(${BGImage})` }}>
+        <div className="relative w-full bg-no-repeat bg-cover aspect-video" style={{ backgroundImage: `url(${BGImage})` }}>
     
     <Logo/>
         <div className="flex-col items-center justify-center h-screen" style={{marginTop:'100px'}}>
           
-          <div className="flex justify-center p-0 my-0 mx-auto w-full">
+          <div className="flex justify-center w-full p-0 mx-auto my-0">
             <div className="pr-2">
               <Card className="glassmorphism-card">
                 <CardBody className="p-0">
@@ -139,7 +139,7 @@ const SinglePokeCollection = () => {
             </div>
           </div>
           {/* CTA buttons */}
-          <div className="flex justify-evenly mt-8">
+          <div className="flex mt-8 justify-evenly">
             <Button  style={{ fontFamily: 'G1', fontSize: '1rem' , backgroundColor: '#ffcc01' }}
              onClick={goBackToPokeIndex}>Go Back</Button>
            { /* <Button  style={{ fontFamily: 'G1', fontSize: '1rem' , backgroundColor: '#ffcc01' }}>Add to Collection</Button> */}
